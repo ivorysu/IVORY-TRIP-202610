@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>2026 京阪神秋季 8 日手帳 · 旅のしおり</title>
+
+  <!-- PWA & Mobile Web App Meta -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="京阪神手帳">
+  <meta name="theme-color" content="#FAF6EE">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%233B6852'/><text x='50%' y='55%' font-size='50' text-anchor='middle' dominant-baseline='central'>🍁</text></svg>">
+  <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%222026%20%E4%BA%AC%E9%98%AA%E7%A5%9E%E7%A7%8B%E5%AD%A3%E6%89%8B%E5%B8%B3%22%2C%22short_name%22%3A%22%E4%BA%AC%E9%98%AA%E7%A5%9E%E6%89%8B%E5%B8%B3%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FAF6EE%22%2C%22theme_color%22%3A%22%23FAF6EE%22%7D">
+
+  <!-- Fonts & Libraries -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ghibli: {
+              cream: '#FBF8F1',
+              parchment: '#F4ECE1',
+              moss: '#3B6852',
+              leaf: '#5D8A68',
+              softleaf: '#EBF3ED',
+              sky: '#4B7B9A',
+              softsky: '#E7EFF5',
+              terracotta: '#C15C3D',
+              amber: '#E39A44',
+              bark: '#543D32',
+              soot: '#2C2523'
+            }
+          },
+          fontFamily: {
+            sans: ['"Zen Maru Gothic"', 'sans-serif'],
+            serif: ['"Noto Serif TC"', 'serif']
+          },
+          boxShadow: {
+            'ghibli-sm': '0 2px 0 #E2D7C8, 0 3px 8px rgba(84,61,50,0.06)',
+            'ghibli': '0 3px 0 #DACBBC, 0 6px 16px rgba(84,61,50,0.08)',
+            'ghibli-float': '0 8px 0 #D4C3B0, 0 14px 24px rgba(84,61,50,0.12)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #F8F3EB;
+      background-image: 
+        radial-gradient(#E8DEC8 0.75px, transparent 0.75px),
+        radial-gradient(#E8DEC8 0.75px, #F8F3EB 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      color: #4A3B32;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    input, textarea, select { user-select: text; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .ghibli-border { border: 1.5px solid #E4D7C5; border-radius: 20px; }
+    .ghibli-ticket { position: relative; background: #FFFDF9; border: 1.5px dashed #D3C4B0; }
+    .stamp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      border: 1.5px solid currentColor;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+    }
+    @keyframes ghibli-float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
+    @keyframes ghibli-blink { 0%, 90%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+    .animate-float { animation: ghibli-float 3.5s ease-in-out infinite; }
+    .animate-blink { animation: ghibli-blink 4s infinite; transform-origin: center; }
+    .btn-ghibli { transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .btn-ghibli:active { transform: translateY(2px) scale(0.97); }
+    .tab-content { animation: ghibliFadeUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes ghibliFadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .polaroid-frame {
+      background: #FFFFFF;
+      padding: 6px 6px 14px 6px;
+      border: 1px solid #E6DCCD;
+      box-shadow: 0 4px 10px rgba(74, 59, 50, 0.08);
+      transform: rotate(-0.5deg);
+    }
+    .bg-illustration { position: fixed; pointer-events: none; z-index: 0; opacity: 0.15; }
+
+    /* A4 直式列印排版 */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 8.5pt;
+        background-image: none !important;
+      }
+      header, nav, #daySelectorContainer, #tab-timeline, #tab-wishlist, #tab-checklist, #tab-expenses, #tab-memos, button, .fixed, .modal, #floating-soot, .bg-illustration {
+        display: none !important;
+      }
+      #printContainer { display: block !important; visibility: visible !important; }
+      @page {
+        size: A4 portrait;
+        margin: 10mm 10mm;
+      }
+      .print-page-group {
+        page-break-before: always;
+        break-before: page;
+      }
+      .print-page-group:first-child {
+        page-break-before: avoid;
+        break-before: avoid;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      thead { display: table-header-group; }
+      tr { page-break-inside: avoid; }
+      th, td {
+        border: 1px solid #cbd5e1;
+        padding: 6px 8px;
+        vertical-align: top;
+      }
+      th {
+        background-color: #3B6852 !important;
+        color: #ffffff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .zebra-row:nth-child(even) {
+        background-color: #f8fafc !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen pb-28 text-ghibli-bark relative overflow-x-hidden">
+
+  <!-- 背景京都建築浮水印 -->
+  <div class="bg-illustration top-14 -left-10 w-64 h-64 text-ghibli-moss">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M100 15 L100 35 M95 35 L105 35 M85 45 L115 45 M70 55 L130 55 L120 75 L80 75 Z" />
+      <path d="M60 75 L140 75 L130 100 L70 100 Z" />
+      <path d="M50 100 L150 100 L140 135 L60 135 Z" />
+      <path d="M40 135 L160 135 L150 180 L50 180 Z" />
+    </svg>
+  </div>
+  <div class="bg-illustration top-1/3 -right-12 w-72 h-72 text-ghibli-amber">
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M100 25 L100 40 M92 40 L108 40 M80 50 Q100 42 120 50 L115 65 L85 65 Z" />
+      <path d="M70 65 Q100 55 130 65 L125 90 L75 90 Z" />
+      <path d="M55 90 Q100 78 145 90 L140 120 L60 120 Z" />
+      <path d="M40 120 Q100 105 160 120 L155 155 L45 155 Z" />
+      <path d="M30 155 L170 155 L180 190 L20 190 Z" stroke-width="2.2" />
+    </svg>
+  </div>
+
+  <!-- 頂部導航列 -->
+  <header class="sticky top-0 z-40 bg-[#FAF6EE]/95 backdrop-blur-md border-b-2 border-[#E7DCcb] px-4 py-2.5 shadow-sm">
+    <div class="max-w-xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-2xl bg-ghibli-moss/10 flex items-center justify-center text-ghibli-moss border border-ghibli-moss/20 shadow-inner">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 fill-ghibli-moss text-ghibli-moss">
+            <path d="M12 2C9.5 2 7 3.5 7 6v1c-2 0-4 2-4 5 0 6 5 10 9 10s9-4 9-10c0-3-2-5-4-5V6c0-2.5-2.5-4-5-4zm0 2c1.7 0 3 .9 3 2v1H9V6c0-1.1 1.3-2 3-2zm0 7c3.9 0 7 3.1 7 8-3.1 0-7-1.5-7-8zm-2 0c0 6.5-3.9 8-7 8 0-4.9 3.1-8 7-8z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="stamp-badge border-ghibli-terracotta/40 text-ghibli-terracotta bg-ghibli-terracotta/10 text-[10px] py-0 px-2">
+              🍁 秋季 8 日手帳
+            </span>
+            <span class="text-[10px] text-ghibli-leaf font-bold">KIX2026</span>
+          </div>
+          <h1 class="text-sm sm:text-base font-bold font-serif text-ghibli-bark tracking-tight mt-0.5">
+            2026 京阪神秋季 8 日悠閒遊
+          </h1>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button onclick="exportItineraryPdf()" class="btn-ghibli px-2.5 py-1.5 bg-ghibli-moss text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-ghibli-sm hover:bg-[#325845]" title="A4 直式列印">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">匯出 A4</span>
+        </button>
+        <button onclick="openSettingsModal()" class="btn-ghibli p-2 text-ghibli-bark/80 hover:text-ghibli-moss bg-ghibli-parchment/60 hover:bg-ghibli-parchment rounded-xl border border-[#DECDBB]">
+          <i data-lucide="settings-2" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容容器 -->
+  <main class="max-w-xl mx-auto px-3.5 pt-3 relative z-10">
+
+    <!-- 日期選擇標籤 -->
+    <div id="daySelectorContainer" class="mb-3">
+      <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 px-0.5" id="dayTabs"></div>
+    </div>
+
+    <!-- TAB 1: 行程路線 (無時間欄位) -->
+    <section id="tab-timeline" class="tab-content space-y-3.5">
+      <div class="ghibli-border bg-[#FFFDF9] p-3.5 shadow-ghibli-sm relative overflow-hidden">
+        <div class="flex items-center justify-between relative z-10">
+          <div>
+            <span class="px-2.5 py-1 rounded-lg bg-ghibli-moss text-white text-xs font-black tracking-wider font-serif" id="currentDayDateSub">
+              Day 1 · 10/30 (五)
+            </span>
+          </div>
+          <button onclick="openAddItemModal()" class="btn-ghibli shrink-0 flex items-center gap-1 text-xs bg-ghibli-moss hover:bg-[#315643] text-white font-bold px-3 py-1.5 rounded-xl shadow-ghibli-sm">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> 新增活動
+          </button>
+        </div>
+      </div>
+
+      <div class="space-y-3 relative before:absolute before:inset-0 before:left-3.5 before:w-0.5 before:bg-[#DECDBB] before:z-0" id="timelineList"></div>
+    </section>
+
+    <!-- TAB 2: 採購圖鑑 -->
+    <section id="tab-wishlist" class="tab-content hidden space-y-3.5">
+      <div class="ghibli-border bg-[#FFFDF9] p-3.5 shadow-ghibli-sm space-y-2.5">
+        <div class="flex items-center justify-between border-b border-[#E7DCcb] pb-2">
+          <div class="flex items-center gap-1.5">
+            <span class="text-base">🏷️</span>
+            <div>
+              <h3 class="text-xs font-bold text-ghibli-bark">商場 / 藥妝折價券條碼庫</h3>
+              <p class="text-[10px] text-ghibli-bark/60">免稅券截圖儲存，結帳時點開直接刷條碼</p>
+            </div>
+          </div>
+          <label class="btn-ghibli text-[11px] bg-ghibli-amber text-white font-bold px-2.5 py-1.5 rounded-xl flex items-center gap-1 shadow-ghibli-sm cursor-pointer">
+            <i data-lucide="upload" class="w-3.5 h-3.5"></i> 上傳折價券
+            <input type="file" accept="image/*" class="hidden" onchange="handleCouponUpload(event)">
+          </label>
+        </div>
+        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="couponsList"></div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2.5">
+        <div class="ghibli-border bg-[#FFFDF9] p-3 shadow-ghibli-sm">
+          <span class="text-[11px] text-ghibli-bark/60 font-bold flex items-center gap-1">
+            <i data-lucide="check-check" class="w-3.5 h-3.5 text-ghibli-leaf"></i> 採購進度
+          </span>
+          <div class="text-lg font-black text-ghibli-bark mt-1" id="wishlistStatsCount">0 / 0 件</div>
+          <span class="text-[10px] text-ghibli-moss font-bold bg-ghibli-moss/10 px-1.5 py-0.5 rounded" id="wishlistStatsPercent">完成 0%</span>
+        </div>
+        <div class="ghibli-border bg-[#FFFDF9] p-3 shadow-ghibli-sm">
+          <span class="text-[11px] text-ghibli-bark/60 font-bold flex items-center gap-1">
+            <i data-lucide="coins" class="w-3.5 h-3.5 text-ghibli-amber"></i> 預估採購額
+          </span>
+          <div class="text-lg font-black text-ghibli-terracotta mt-1" id="wishlistTotalJPY">¥ 0</div>
+          <span class="text-[10px] text-ghibli-bark/60">約 NT$ <span id="wishlistTotalTWD">0</span></span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar py-1 text-xs" id="wishlistFilterChips">
+          <button onclick="filterWishlist('all')" class="wish-filter-btn px-3 py-1.5 rounded-full font-bold bg-ghibli-moss text-white shadow-ghibli-sm" data-loc="all">全部商品</button>
+          <button onclick="filterWishlist('心齋橋')" class="wish-filter-btn px-3 py-1.5 rounded-full font-bold bg-[#FFFDF9] text-ghibli-bark border border-[#DECDBB]" data-loc="心齋橋">心齋橋藥妝</button>
+          <button onclick="filterWishlist('機場')" class="wish-filter-btn px-3 py-1.5 rounded-full font-bold bg-[#FFFDF9] text-ghibli-bark border border-[#DECDBB]" data-loc="機場">機場伴手</button>
+          <button onclick="filterWishlist('超市')" class="wish-filter-btn px-3 py-1.5 rounded-full font-bold bg-[#FFFDF9] text-ghibli-bark border border-[#DECDBB]" data-loc="超市">黑門/超市</button>
+        </div>
+        <button onclick="openAddWishlistModal()" class="btn-ghibli text-xs bg-ghibli-moss text-white font-bold px-3 py-2 rounded-xl flex items-center gap-1 shrink-0 shadow-ghibli-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i> 新增商品
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="wishlistContainer"></div>
+    </section>
+
+    <!-- TAB 3: 準備清單 -->
+    <section id="tab-checklist" class="tab-content hidden space-y-3.5">
+      <div class="ghibli-border bg-[#FFFDF9] p-3.5 shadow-ghibli-sm flex items-center justify-between">
+        <div>
+          <h3 class="text-xs font-bold text-ghibli-bark flex items-center gap-1.5">
+            <i data-lucide="check-square" class="w-4 h-4 text-ghibli-leaf"></i> 行前準備與行李打包檢核
+          </h3>
+          <p class="text-[10px] text-ghibli-bark/60 mt-0.5" id="checklistProgressText">完成 0 / 0 項</p>
+        </div>
+        <button onclick="openAddChecklistModal()" class="btn-ghibli text-xs bg-ghibli-moss text-white font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-ghibli-sm">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i> 新增項目
+        </button>
+      </div>
+      <div class="space-y-3" id="checklistContainer"></div>
+    </section>
+
+    <!-- TAB 4: 分帳帳本 -->
+    <section id="tab-expenses" class="tab-content hidden space-y-3.5">
+      <div class="ghibli-border bg-[#FFFDF9] p-3.5 shadow-ghibli-sm space-y-2.5">
+        <div class="flex items-center justify-between border-b border-[#E7DCcb] pb-2">
+          <span class="text-xs font-bold text-ghibli-bark flex items-center gap-1">
+            <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-ghibli-terracotta"></i> 旅程總支出 (含公費與個人)
+          </span>
+          <span class="text-[10px] text-ghibli-leaf font-bold">雙幣獨立實支</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center">
+          <div class="p-2 rounded-xl bg-ghibli-parchment/60">
+            <span class="text-[10px] text-ghibli-bark/60 block">🇯🇵 日幣總計</span>
+            <span class="text-lg font-black text-ghibli-bark" id="totalExpenseJPY">¥ 0</span>
+          </div>
+          <div class="p-2 rounded-xl bg-ghibli-parchment/60">
+            <span class="text-[10px] text-ghibli-bark/60 block">🇹🇼 台幣總計</span>
+            <span class="text-lg font-black text-ghibli-terracotta" id="totalExpenseTWD">NT$ 0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-2">
+        <div class="ghibli-border bg-[#FFFDF9] p-2.5 shadow-ghibli-sm text-center">
+          <span class="text-[10px] text-ghibli-bark/70 font-bold block">👤 彥如代墊</span>
+          <span class="text-xs font-black text-ghibli-moss mt-0.5 block" id="spentByYanru">¥ 0</span>
+          <span class="text-[9px] text-ghibli-bark/50 block" id="spentByYanruTWD">NT$ 0</span>
+        </div>
+        <div class="ghibli-border bg-[#FFFDF9] p-2.5 shadow-ghibli-sm text-center">
+          <span class="text-[10px] text-ghibli-bark/70 font-bold block">👥 同行家人</span>
+          <span class="text-xs font-black text-ghibli-amber mt-0.5 block" id="spentByFamily">¥ 0</span>
+          <span class="text-[9px] text-ghibli-bark/50 block" id="spentByFamilyTWD">NT$ 0</span>
+        </div>
+        <div class="ghibli-border bg-[#FFFDF9] p-2.5 shadow-ghibli-sm text-center border-l-2 border-l-ghibli-sky">
+          <span class="text-[10px] text-ghibli-sky font-bold block">👛 公費支出</span>
+          <span class="text-xs font-black text-ghibli-sky mt-0.5 block" id="spentByPublic">¥ 0</span>
+          <span class="text-[9px] text-ghibli-bark/50 block" id="spentByPublicTWD">NT$ 0</span>
+        </div>
+      </div>
+
+      <div class="ghibli-ticket p-3.5 rounded-2xl shadow-ghibli-sm bg-[#FFFDF7] space-y-2">
+        <div class="flex items-center justify-between pb-1.5 border-b border-dashed border-[#E0D2BF]">
+          <div class="flex items-center gap-1.5">
+            <i data-lucide="scale" class="w-4 h-4 text-ghibli-leaf"></i>
+            <h3 class="text-xs font-bold text-ghibli-bark">代墊平帳建議 (不含公費)</h3>
+          </div>
+          <span class="text-[10px] bg-ghibli-moss/10 text-ghibli-moss px-1.5 py-0.2 rounded font-bold">公費獨立</span>
+        </div>
+        <div id="settlementList" class="space-y-1 text-xs text-ghibli-bark/85">目前帳目皆已結清或尚無代墊花費。</div>
+      </div>
+
+      <div class="flex items-center justify-between pt-1">
+        <h3 class="text-xs font-bold text-ghibli-bark flex items-center gap-1">
+          <i data-lucide="scroll-text" class="w-3.5 h-3.5 text-ghibli-amber"></i> 記帳流水明細
+        </h3>
+        <button onclick="openAddExpenseModal()" class="btn-ghibli text-xs bg-ghibli-moss text-white font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-ghibli-sm">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i> 記一筆
+        </button>
+      </div>
+      <div class="space-y-2" id="expenseItemsList"></div>
+    </section>
+
+    <!-- TAB 5: 憑證手帳 -->
+    <section id="tab-memos" class="tab-content hidden space-y-4">
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-xs font-bold text-ghibli-bark flex items-center gap-1.5">
+              <i data-lucide="file-key" class="w-4 h-4 text-ghibli-sky"></i> 電子機票、住宿憑單與保單庫
+            </h3>
+            <p class="text-[10px] text-ghibli-bark/60">支援 PDF 文件與圖檔完整預覽與下載</p>
+          </div>
+          <button onclick="openAddDocumentModal()" class="btn-ghibli text-xs bg-ghibli-sky text-white font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-ghibli-sm">
+            <i data-lucide="file-up" class="w-3.5 h-3.5"></i> 上傳憑證
+          </button>
+        </div>
+        <div class="space-y-2.5" id="documentsList"></div>
+      </div>
+
+      <div class="border-t-2 border-[#E7DCcb] pt-3.5 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold text-ghibli-bark flex items-center gap-1.5">
+            <i data-lucide="bookmark" class="w-4 h-4 text-ghibli-terracotta"></i> 重要代碼、預約號與備忘
+          </h3>
+          <button onclick="openAddMemoModal()" class="btn-ghibli text-xs bg-ghibli-moss text-white font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-ghibli-sm">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i> 新增備忘
+          </button>
+        </div>
+        <div class="space-y-2" id="memoList"></div>
+      </div>
+    </section>
+
+    <!-- A4 直式列印專用隱藏容器 -->
+    <div id="printContainer" class="hidden"></div>
+  </main>
+
+  <!-- 懸浮小精靈 -->
+  <div id="floating-soot" class="fixed bottom-20 right-4 z-40 animate-float">
+    <button onclick="showToast('🍁 祝您京阪神旅途愉快！')" class="relative flex items-center justify-center p-2 rounded-full focus:outline-none">
+      <div class="relative w-12 h-12 bg-ghibli-soot rounded-full shadow-ghibli-float flex items-center justify-center border-2 border-ghibli-bark/80">
+        <div class="flex items-center gap-1 z-10 animate-blink">
+          <div class="w-3 h-3 bg-white rounded-full flex items-center justify-center shadow-inner">
+            <div class="w-1 h-1 bg-ghibli-soot rounded-full"></div>
+          </div>
+          <div class="w-3 h-3 bg-white rounded-full flex items-center justify-center shadow-inner">
+            <div class="w-1 h-1 bg-ghibli-soot rounded-full"></div>
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+
+  <!-- 底部導航欄 -->
+  <nav class="fixed bottom-0 inset-x-0 z-30 bg-[#FAF6EE]/95 backdrop-blur-md border-t-2 border-[#E7DCcb] px-2 py-2 shadow-ghibli-float">
+    <div class="max-w-md mx-auto grid grid-cols-5 items-center text-center">
+      <button onclick="switchTab('timeline')" id="nav-timeline" class="btn-ghibli flex flex-col items-center gap-0.5 text-ghibli-moss font-bold text-[10.5px]">
+        <div class="p-1 rounded-xl bg-ghibli-moss/10"><i data-lucide="compass" class="w-4 h-4"></i></div>
+        行程路線
+      </button>
+      <button onclick="switchTab('wishlist')" id="nav-wishlist" class="btn-ghibli flex flex-col items-center gap-0.5 text-ghibli-bark/60 font-medium text-[10.5px]">
+        <div class="p-1 rounded-xl hover:bg-ghibli-parchment"><i data-lucide="shopping-bag" class="w-4 h-4"></i></div>
+        採購圖鑑
+      </button>
+      <button onclick="switchTab('checklist')" id="nav-checklist" class="btn-ghibli flex flex-col items-center gap-0.5 text-ghibli-bark/60 font-medium text-[10.5px]">
+        <div class="p-1 rounded-xl hover:bg-ghibli-parchment"><i data-lucide="check-square" class="w-4 h-4"></i></div>
+        準備清單
+      </button>
+      <button onclick="switchTab('expenses')" id="nav-expenses" class="btn-ghibli flex flex-col items-center gap-0.5 text-ghibli-bark/60 font-medium text-[10.5px]">
+        <div class="p-1 rounded-xl hover:bg-ghibli-parchment"><i data-lucide="receipt" class="w-4 h-4"></i></div>
+        分帳帳本
+      </button>
+      <button onclick="switchTab('memos')" id="nav-memos" class="btn-ghibli flex flex-col items-center gap-0.5 text-ghibli-bark/60 font-medium text-[10.5px]">
+        <div class="p-1 rounded-xl hover:bg-ghibli-parchment"><i data-lucide="book-open" class="w-4 h-4"></i></div>
+        憑證手帳
+      </button>
+    </div>
+  </nav>
+
+  <!-- 彈窗與浮層 (Modals) -->
+  <div id="transportEditModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/60 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="ghibli-ticket rounded-3xl max-w-sm w-full p-5 shadow-2xl text-xs space-y-3.5 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-dashed border-[#DECDBB] pb-2">
+        <h3 class="text-sm font-bold font-serif text-ghibli-bark" id="transModalTitle">新增/編輯交通接駁</h3>
+        <button onclick="closeModal('transportEditModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <input type="hidden" id="transTargetItinId">
+      <input type="hidden" id="transTargetOptId">
+      <div class="space-y-2.5">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-ghibli-bark mb-1">交通工具</label>
+            <select id="transOptType" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white">
+              <option value="walk">🚶 步行</option>
+              <option value="taxi">🚕 計程車</option>
+              <option value="metro">🚇 地鐵</option>
+              <option value="train">🚄 JR / 特急</option>
+              <option value="bus">🚌 公車 / 巴士</option>
+              <option value="flight">✈️ 航班</option>
+              <option value="other">🚲 其他</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-ghibli-bark mb-1">車程 (分鐘)</label>
+            <input type="number" id="transOptDuration" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white" placeholder="15">
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">動線說明 *</label>
+          <input type="text" id="transOptDesc" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white" placeholder="例：搭乘南海特急直達">
+        </div>
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">連結網址 (選填)</label>
+          <input type="url" id="transOptUrl" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white text-ghibli-sky" placeholder="https://...">
+        </div>
+        <div class="border-t border-dashed border-[#DECDBB] pt-2 space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label class="block font-bold text-ghibli-bark text-[11px]">交通備註 (條列式)</label>
+            <button type="button" onclick="addTransNoteRow()" class="btn-ghibli text-[10px] bg-ghibli-moss/10 text-ghibli-moss font-bold px-2 py-0.5 rounded-lg">+ 新增一條</button>
+          </div>
+          <div id="transNotesContainer" class="space-y-1"></div>
+        </div>
+        <div class="p-2.5 rounded-2xl bg-[#F5ECE0] border border-[#DECDBB] space-y-1.5">
+          <span class="block font-bold text-ghibli-bark text-[10px]">預估車資：</span>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <span class="block text-[10px] text-ghibli-bark/70 mb-0.5">🇯🇵 日幣 (¥)</span>
+              <input type="number" id="transOptCostJPY" class="w-full p-1.5 border border-[#DECDBB] rounded-xl bg-white" placeholder="400">
+            </div>
+            <div>
+              <span class="block text-[10px] text-ghibli-bark/70 mb-0.5">🇹🇼 台幣 (NT$)</span>
+              <input type="number" id="transOptCostTWD" class="w-full p-1.5 border border-[#DECDBB] rounded-xl bg-white" placeholder="90">
+            </div>
+          </div>
+          <label class="inline-flex items-center gap-1.5 cursor-pointer font-bold text-ghibli-bark text-[11px] pt-1">
+            <input type="checkbox" id="transOptBooked" class="w-4 h-4 rounded text-ghibli-moss">
+            <span>已劃位 / 已購票 ✓</span>
+          </label>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 pt-2 border-t border-dashed border-[#DECDBB]">
+        <button onclick="deleteCurrentTransportOption()" id="btnDeleteTransOpt" class="hidden px-3 py-2 text-ghibli-terracotta rounded-xl font-bold">刪除</button>
+        <button onclick="saveTransportOption()" class="flex-1 btn-ghibli bg-ghibli-moss text-white font-bold py-2.5 rounded-xl shadow-ghibli-sm">儲存方案</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="itineraryModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/60 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="bg-[#FFFDF9] rounded-3xl max-w-md w-full max-h-[92vh] flex flex-col p-5 shadow-2xl border-2 border-[#E7DCcb] text-xs space-y-3">
+      <div class="flex items-center justify-between border-b border-[#E7DCcb] pb-2">
+        <h3 class="text-sm font-bold font-serif text-ghibli-bark" id="itinModalTitle">新增/編輯活動</h3>
+        <button onclick="closeModal('itineraryModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="overflow-y-auto space-y-3 pr-1 flex-1">
+        <input type="hidden" id="itinItemId">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-ghibli-bark mb-1">指定天數</label>
+            <select id="itinDay" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white">
+              <option value="1">Day 1 (10/30 五)</option>
+              <option value="2">Day 2 (10/31 六)</option>
+              <option value="3">Day 3 (11/01 日)</option>
+              <option value="4">Day 4 (11/02 一)</option>
+              <option value="5">Day 5 (11/03 二)</option>
+              <option value="6">Day 6 (11/04 三)</option>
+              <option value="7">Day 7 (11/05 四)</option>
+              <option value="8">Day 8 (11/06 五)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-ghibli-bark mb-1">活動類型</label>
+            <select id="itinCategory" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white">
+              <option value="sightseeing">⛩️ 景點</option>
+              <option value="food">🍵 餐飲</option>
+              <option value="transport">🚄 移動</option>
+              <option value="shopping">🛍️ 採購</option>
+              <option value="hotel">🏨 住宿</option>
+              <option value="airport">✈️ 機場</option>
+              <option value="other">🍃 其他</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">活動標題 *</label>
+          <input type="text" id="itinTitle" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white font-bold" placeholder="例：清水寺參拜">
+        </div>
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">Google Maps 地標名稱</label>
+          <input type="text" id="itinLocation" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white" placeholder="例：清水寺">
+        </div>
+        <div class="border-t border-[#E7DCcb] pt-2.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <label class="block font-bold text-ghibli-bark">溫馨手記 / 備註 (條列式)</label>
+            <button type="button" onclick="addNoteRow()" class="btn-ghibli text-[10px] bg-ghibli-moss/10 text-ghibli-moss font-bold px-2 py-0.5 rounded-lg">+ 新增一條</button>
+          </div>
+          <div id="bulletNotesContainer" class="space-y-1.5"></div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 pt-2 border-t border-[#E7DCcb]">
+        <button onclick="deleteCurrentItinItem()" id="btnDeleteItin" class="hidden px-3 py-2 text-ghibli-terracotta rounded-xl font-bold">刪除</button>
+        <button onclick="saveItinItem()" class="flex-1 btn-ghibli bg-ghibli-moss text-white font-bold py-2.5 rounded-xl shadow-ghibli-sm">儲存活動</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="wishlistModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/60 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="bg-[#FFFDF9] rounded-3xl max-w-sm w-full max-h-[90vh] flex flex-col p-5 shadow-2xl border-2 border-[#E7DCcb] text-xs space-y-3">
+      <div class="flex items-center justify-between border-b border-[#E7DCcb] pb-2">
+        <h3 class="text-sm font-bold font-serif text-ghibli-bark" id="wishModalTitle">收藏心願好物</h3>
+        <button onclick="closeModal('wishlistModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="overflow-y-auto space-y-3 pr-1 flex-1">
+        <input type="hidden" id="wishItemId">
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">商品名稱 *</label>
+          <input type="text" id="wishTitle" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white font-bold" placeholder="例：合利他命 EX PLUS">
+        </div>
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">購買地點 *</label>
+          <input type="text" id="wishLocation" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white" placeholder="例：心齋橋筋藥妝店">
+        </div>
+        <div class="p-3 bg-[#F5ECE0] rounded-2xl border border-[#DECDBB] space-y-2">
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <span class="block text-[10px] text-ghibli-bark/60 mb-0.5">日幣 (¥)</span>
+              <input type="number" id="wishPriceJPY" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white" placeholder="5500">
+            </div>
+            <div>
+              <span class="block text-[10px] text-ghibli-bark/60 mb-0.5">台幣 (NT$)</span>
+              <input type="number" id="wishPriceTWD" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white" placeholder="1200">
+            </div>
+          </div>
+          <div>
+            <label class="block font-bold text-ghibli-bark mb-1 text-[11px]">狀態</label>
+            <select id="wishPurchased" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white">
+              <option value="false">尚未採購</option>
+              <option value="true">已採購完成 ✓</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">商品照片</label>
+          <label class="flex items-center justify-center gap-1.5 p-3 border-2 border-dashed border-[#DECDBB] rounded-2xl cursor-pointer bg-white">
+            <i data-lucide="camera" class="w-4 h-4 text-ghibli-leaf"></i>
+            <span id="wishPhotoLabelText">選擇照片</span>
+            <input type="file" accept="image/*" class="hidden" onchange="handleWishPhotoUpload(event)">
+          </label>
+          <div id="wishPhotoPreviewContainer" class="hidden mt-2 polaroid-frame h-32 flex items-center justify-center">
+            <img id="wishPhotoPreviewImg" src="" class="h-full w-full object-contain">
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 pt-2 border-t border-[#E7DCcb]">
+        <button onclick="deleteCurrentWishItem()" id="btnDeleteWish" class="hidden px-3 py-2 text-ghibli-terracotta rounded-xl font-bold">刪除</button>
+        <button onclick="saveWishItem()" class="flex-1 btn-ghibli bg-ghibli-moss text-white font-bold py-2.5 rounded-xl shadow-ghibli-sm">收納好物</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="checklistModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/60 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="bg-[#FFFDF9] rounded-3xl max-w-sm w-full p-5 shadow-2xl border-2 border-[#E7DCcb] text-xs space-y-3">
+      <div class="flex items-center justify-between border-b border-[#E7DCcb] pb-2">
+        <h3 class="text-sm font-bold font-serif text-ghibli-bark" id="checkModalTitle">準備項目</h3>
+        <button onclick="closeModal('checklistModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <input type="hidden" id="checkItemId">
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">類別</label>
+        <select id="checkCategory" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white">
+          <option value="carryon">🎒 隨身物品</option>
+          <option value="luggage">🧳 託運行李</option>
+          <option value="document">📄 證件單據</option>
+          <option value="todo">⏰ 行前待辦</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">項目名稱 *</label>
+        <input type="text" id="checkTitle" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white font-bold" placeholder="例：護照正本">
+      </div>
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">備註說明</label>
+        <input type="text" id="checkNotes" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white" placeholder="例：放在隨身包內">
+      </div>
+      <div class="flex items-center gap-2 pt-2 border-t border-[#E7DCcb]">
+        <button onclick="deleteCurrentCheckItem()" id="btnDeleteCheck" class="hidden px-3 py-2 text-ghibli-terracotta rounded-xl font-bold">刪除</button>
+        <button onclick="saveCheckItem()" class="flex-1 btn-ghibli bg-ghibli-moss text-white font-bold py-2.5 rounded-xl shadow-ghibli-sm">確認儲存</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="expenseModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/60 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="bg-[#FFFDF9] rounded-3xl max-w-sm w-full p-5 shadow-2xl border-2 border-[#E7DCcb] text-xs space-y-3">
+      <div class="flex items-center justify-between border-b border-[#E7DCcb] pb-2">
+        <h3 class="text-sm font-bold font-serif text-ghibli-bark">記一筆支出</h3>
+        <button onclick="closeModal('expenseModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">項目名稱 *</label>
+        <input type="text" id="expTitle" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white font-bold" placeholder="例：燒肉晚餐">
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">支出類別</label>
+          <select id="expCategory" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white">
+            <option value="採購">🛍️ 採購</option>
+            <option value="餐飲">🍵 餐飲</option>
+            <option value="景點">⛩️ 景點</option>
+            <option value="保單">🛡️ 保單</option>
+            <option value="機票">✈️ 機票</option>
+            <option value="住宿">🏨 住宿</option>
+            <option value="交通">🚄 交通</option>
+            <option value="其他">🍃 其他</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1">付款方式</label>
+          <select id="expPayMethod" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white">
+            <option value="現金">💵 現金</option>
+            <option value="刷卡">💳 刷卡</option>
+          </select>
+        </div>
+      </div>
+      <div class="p-3 bg-[#F5ECE0] rounded-2xl border border-[#DECDBB] space-y-2">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <span class="block text-[10px] text-ghibli-bark/60 mb-0.5">🇯🇵 日幣 (¥)</span>
+            <input type="number" id="expAmountJPY" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white" placeholder="2500">
+          </div>
+          <div>
+            <span class="block text-[10px] text-ghibli-bark/60 mb-0.5">🇹🇼 台幣 (NT$)</span>
+            <input type="number" id="expAmountTWD" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white" placeholder="600">
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-ghibli-bark mb-1 text-[11px]">出資代墊</label>
+          <select id="expPaidBy" class="w-full p-2 border border-[#DECDBB] rounded-xl bg-white">
+            <option value="彥如">彥如 (個人)</option>
+            <option value="同行家人">同行家人 (個人)</option>
+            <option value="公費">👛 公費 (公費錢包)</option>
+          </select>
+        </div>
+      </div>
+      <button onclick="saveManualExpense()" class="w-full btn-ghibli bg-ghibli-terracotta text-white font-bold py-2.5 rounded-xl shadow-ghibli-sm">寫入帳本</button>
+    </div>
+  </div>
+
+  <div id="documentModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/60 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="bg-[#FFFDF9] rounded-3xl max-w-sm w-full p-5 shadow-2xl border-2 border-[#E7DCcb] text-xs space-y-3">
+      <div class="flex items-center justify-between border-b border-[#E7DCcb] pb-2">
+        <h3 class="text-sm font-bold font-serif text-ghibli-bark">票券憑證上傳</h3>
+        <button onclick="closeModal('documentModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">憑證名稱 *</label>
+        <input type="text" id="docTitle" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white font-bold" placeholder="例：海外旅平險保單">
+      </div>
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">檔案上傳 (支援 PDF 或 圖片) *</label>
+        <label class="flex flex-col items-center justify-center p-4 border-2 border-dashed border-[#DECDBB] rounded-2xl cursor-pointer bg-white">
+          <i data-lucide="cloud-upload" class="w-6 h-6 text-ghibli-sky mb-1"></i>
+          <span class="font-bold text-ghibli-bark" id="docFileNameLabel">點擊選擇檔案</span>
+          <input type="file" accept="application/pdf,image/*" class="hidden" onchange="handleDocFileUpload(event)">
+        </label>
+      </div>
+      <button onclick="saveDocumentItem()" class="w-full btn-ghibli bg-ghibli-sky text-white font-bold py-2.5 rounded-xl shadow-ghibli-sm">妥善收納</button>
+    </div>
+  </div>
+
+  <div id="docViewerModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
+    <div class="bg-[#FFFDF9] rounded-3xl max-w-2xl w-full h-[88vh] flex flex-col shadow-2xl border-2 border-[#E7DCcb] overflow-hidden">
+      <div class="flex items-center justify-between p-3.5 border-b border-[#E7DCcb] bg-[#FAF6EE]">
+        <h3 class="text-xs sm:text-sm font-bold font-serif text-ghibli-bark truncate" id="viewerTitle">憑證檢視</h3>
+        <div class="flex items-center gap-2">
+          <a id="viewerDownloadBtn" href="#" download="file" class="btn-ghibli px-3 py-1.5 bg-ghibli-moss text-white text-xs font-bold rounded-xl flex items-center gap-1 shadow-sm">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> 下載
+          </a>
+          <button onclick="closeModal('docViewerModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+      </div>
+      <div class="flex-1 bg-[#F4ECE1] flex items-center justify-center p-2 overflow-auto" id="viewerContent"></div>
+    </div>
+  </div>
+
+  <div id="memoModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/60 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="ghibli-ticket rounded-3xl max-w-sm w-full p-5 shadow-2xl text-xs space-y-3">
+      <div class="flex items-center justify-between border-b border-dashed border-[#DECDBB] pb-2">
+        <h3 class="text-sm font-bold font-serif text-ghibli-bark" id="memoModalTitle">寫下備忘</h3>
+        <button onclick="closeModal('memoModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <input type="hidden" id="memoItemId">
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">備忘標題 *</label>
+        <input type="text" id="memoTitleInput" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white font-bold" placeholder="例：回程航班資訊">
+      </div>
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">詳細內容</label>
+        <textarea id="memoContentInput" rows="2" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white"></textarea>
+      </div>
+      <div>
+        <label class="block font-bold text-ghibli-bark mb-1">重點代碼 (可一鍵複製)</label>
+        <input type="text" id="memoCodeInput" class="w-full p-2.5 border border-[#DECDBB] rounded-xl bg-white font-mono" placeholder="例：IT255">
+      </div>
+      <div class="flex items-center gap-2 pt-2 border-t border-dashed border-[#DECDBB]">
+        <button onclick="deleteCurrentMemo()" id="btnDeleteMemo" class="hidden px-3 py-2 text-ghibli-terracotta rounded-xl font-bold">刪除</button>
+        <button onclick="saveManualMemo()" class="flex-1 btn-ghibli bg-ghibli-moss text-white font-bold py-2.5 rounded-xl shadow-ghibli-sm">儲存備忘</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="hidden fixed inset-0 z-50 bg-[#2C2523]/60 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="bg-[#FFFDF9] rounded-3xl max-w-sm w-full p-5 shadow-2xl border-2 border-[#E7DCcb] space-y-3.5 text-xs">
+      <div class="flex items-center justify-between border-b border-[#E7DCcb] pb-2">
+        <h3 class="text-sm font-bold font-serif text-ghibli-bark">手帳資料與備份</h3>
+        <button onclick="closeModal('settingsModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="space-y-2">
+        <button onclick="exportItineraryPdf()" class="w-full btn-ghibli bg-ghibli-moss text-white p-2.5 rounded-xl font-bold flex items-center justify-center gap-1.5 shadow-ghibli-sm">
+          <i data-lucide="printer" class="w-4 h-4"></i> A4 直式列印手帳 (依日分頁)
+        </button>
+        <button onclick="exportTripJson()" class="w-full btn-ghibli bg-ghibli-parchment text-ghibli-bark p-2 rounded-xl font-bold flex items-center justify-center gap-1 border border-[#DECDBB]">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i> 下載備份 JSON
+        </button>
+        <label class="w-full btn-ghibli bg-ghibli-parchment text-ghibli-bark p-2 rounded-xl font-bold flex items-center justify-center gap-1 border border-[#DECDBB] cursor-pointer">
+          <i data-lucide="upload" class="w-3.5 h-3.5"></i> 還原備份 JSON
+          <input type="file" accept=".json" class="hidden" onchange="importTripJson(event)">
+        </label>
+        <button onclick="resetToInitialData()" class="w-full text-ghibli-terracotta p-2 rounded-xl font-bold border border-ghibli-terracotta/30">
+          還原預設 8 日京阪神行程
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="ghibliToast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-[#2C2523] text-ghibli-cream px-4 py-2 rounded-2xl shadow-xl text-xs font-bold transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-1.5">
+    <span>✨</span> <span id="toastMsg">通知</span>
+  </div>
+
+  <!-- JAVASCRIPT 邏輯核心 -->
+  <script>
+    const INITIAL_SEED = {
+      "roomCode": "KIX2026",
+      "tripName": "2026 秋季關西京阪神 8 日悠閒遊",
+      "startDate": "2026-10-30",
+      "endDate": "2026-11-06",
+      "members": ["彥如", "同行家人"],
+      "itinerary": [
+        {"id": "d1-1", "dayIndex": 1, "title": "住家行李準備", "category": "other", "locationName": "住家", "bulletNotes": ["出發前檢查護照、網卡與隨身電源"], "transportOptions": []},
+        {"id": "d1-2", "dayIndex": 1, "title": "桃園機場第一航廈", "category": "airport", "locationName": "桃園國際機場第一航廈", "bulletNotes": ["起飛前 2.5 小時抵達機場櫃台辦理報到與託運"], "transportOptions": []},
+        {"id": "d1-3", "dayIndex": 1, "title": "抵達關西機場", "category": "airport", "locationName": "關西國際機場第一航廈", "bulletNotes": ["辦理入境手續、提取行李與啟用網卡"], "transportOptions": []},
+        {"id": "d1-4", "dayIndex": 1, "title": "前往京都 & 飯店入住", "category": "hotel", "locationName": "Premium Apart MONDay Kyoto Gojo", "bulletNotes": ["入住京都五條公寓式飯店", "洗脫烘設備使用"], "transportOptions": [{"id": "t1-1", "type": "train", "description": "JR 特急 HARUKA 直達京都站；轉乘計程車至飯店", "durationMinutes": 90, "costJPY": 3200, "costTWD": null, "isBooked": false, "notes": ["京都站排班計程車接駁至五條"]}]},
+
+        {"id": "d2-1", "dayIndex": 2, "title": "活力早餐", "category": "food", "locationName": "京都五條周邊", "bulletNotes": ["品嚐日式早餐暖胃"], "transportOptions": []},
+        {"id": "d2-2", "dayIndex": 2, "title": "伏見稻荷神社", "category": "sightseeing", "locationName": "伏見稻荷大社", "bulletNotes": ["參拜千本鳥居", "祈求全家旅行平安與健康"], "transportOptions": [{"id": "t2-1", "type": "train", "description": "搭乘京阪電車直達伏見稻荷站", "durationMinutes": 20, "costJPY": 330, "costTWD": null, "isBooked": false, "notes": ["出站步行 3 分即達大鳥居"]}]},
+        {"id": "d2-3", "dayIndex": 2, "title": "京都車站午餐", "category": "food", "locationName": "京都車站大樓", "bulletNotes": ["拉麵小路或地下街和食定食"], "transportOptions": []},
+        {"id": "d2-4", "dayIndex": 2, "title": "京都車站 Aeon mall 逛街及蓋明信片", "category": "shopping", "locationName": "AEON MALL KYOTO", "bulletNotes": ["採買日系生活雜貨", "服務台蓋紀念戳章與寄明信片"], "transportOptions": []},
+        {"id": "d2-5", "dayIndex": 2, "title": "京都車站伴手禮逛街", "category": "shopping", "locationName": "Porta 地下街", "bulletNotes": ["選購京都當季限定伴手禮點心"], "transportOptions": []},
+        {"id": "d2-6", "dayIndex": 2, "title": "回飯店放東西及拍開箱", "category": "hotel", "locationName": "Premium Apart MONDay Kyoto Gojo", "bulletNotes": ["戰利品回房放妥，短暫休息歇腿"], "transportOptions": []},
+        {"id": "d2-7", "dayIndex": 2, "title": "新京極逛街", "category": "shopping", "locationName": "新京極商店街", "bulletNotes": ["漫步全遮雨頂棚商店街與古都文創店"], "transportOptions": []},
+        {"id": "d2-8", "dayIndex": 2, "title": "美味晚餐", "category": "food", "locationName": "河原町周邊", "bulletNotes": ["享受京都風味晚膳"], "transportOptions": []},
+
+        {"id": "d3-1", "dayIndex": 3, "title": "晨間早餐", "category": "food", "locationName": "飯店周邊", "bulletNotes": [], "transportOptions": []},
+        {"id": "d3-2", "dayIndex": 3, "title": "清水寺參拜", "category": "sightseeing", "locationName": "清水寺", "bulletNotes": ["清晨避開人潮參拜本堂舞台與音羽之瀑"], "transportOptions": [{"id": "t3-1", "type": "taxi", "description": "飯店門口計程車直達清水寺停車場", "durationMinutes": 8, "costJPY": 1400, "costTWD": null, "isBooked": false, "notes": ["免走五條坂大斜坡"]}]},
+        {"id": "d3-3", "dayIndex": 3, "title": "二三年坂散策", "category": "sightseeing", "locationName": "二年坂・三年坂", "bulletNotes": ["順坡漫步古老石階與日式町家老街"], "transportOptions": []},
+        {"id": "d3-4", "dayIndex": 3, "title": "八坂之塔 (法觀寺)", "category": "sightseeing", "locationName": "八坂之塔", "bulletNotes": ["古都五重塔打卡合影"], "transportOptions": []},
+        {"id": "d3-5", "dayIndex": 3, "title": "點心布丁時光", "category": "food", "locationName": "產寧坂周邊", "bulletNotes": ["品嚐京都手工人氣布丁甜點歇歇腿"], "transportOptions": []},
+        {"id": "d3-6", "dayIndex": 3, "title": "午餐 - 錦市場壽喜燒", "category": "food", "locationName": "錦市場周邊", "bulletNotes": ["品嚐特選和牛壽喜燒定食"], "transportOptions": []},
+        {"id": "d3-7", "dayIndex": 3, "title": "鴨川散步", "category": "sightseeing", "locationName": "鴨川河畔", "bulletNotes": ["欣賞秋日水鳥與清澈河畔風光"], "transportOptions": []},
+        {"id": "d3-8", "dayIndex": 3, "title": "四條河原町逛街", "category": "shopping", "locationName": "四條河原町", "bulletNotes": ["高島屋與周邊特色日系選品店"], "transportOptions": []},
+        {"id": "d3-9", "dayIndex": 3, "title": "花見小路散步", "category": "sightseeing", "locationName": "花見小路", "bulletNotes": ["感受傍晚祇園燈火闌珊的藝妓街風情"], "transportOptions": []},
+        {"id": "d3-10", "dayIndex": 3, "title": "回飯店小歇", "category": "hotel", "locationName": "Premium Apart MONDay Kyoto Gojo", "bulletNotes": ["放戰利品並洗臉歇息"], "transportOptions": []},
+        {"id": "d3-11", "dayIndex": 3, "title": "晚餐 - 回四條河原町吃燒肉", "category": "food", "locationName": "四條河原町", "bulletNotes": ["享用香氣四溢的和牛燒肉大餐"], "transportOptions": []},
+
+        {"id": "d4-1", "dayIndex": 4, "title": "平等寺參拜", "category": "sightseeing", "locationName": "平等寺 (因幡堂)", "bulletNotes": ["祈求健康安泰與特色御守"], "transportOptions": []},
+        {"id": "d4-2", "dayIndex": 4, "title": "錦市場巡禮", "category": "shopping", "locationName": "錦市場", "bulletNotes": ["品嚐玉子燒、日式醬菜與街頭小吃"], "transportOptions": []},
+        {"id": "d4-3", "dayIndex": 4, "title": "嵐山馬堀站", "category": "transport", "locationName": "JR 馬堀站", "bulletNotes": ["搭 JR 前往馬堀，步行轉乘小火車"], "transportOptions": [{"id": "t4-1", "type": "train", "description": "JR 山陰本線至馬堀站", "durationMinutes": 35, "costJPY": 330, "costTWD": null, "isBooked": false, "notes": ["出站步行 8 分鐘達龜岡站"]}]},
+        {"id": "d4-4", "dayIndex": 4, "title": "嵐山小火車龜岡站", "category": "sightseeing", "locationName": "嵯峨野觀光鐵道 龜岡站", "bulletNotes": ["搭乘復古觀光小火車穿梭保津川峽谷"], "transportOptions": []},
+        {"id": "d4-5", "dayIndex": 4, "title": "嵐山竹林小徑", "category": "sightseeing", "locationName": "嵐山竹林小徑", "bulletNotes": ["漫步幽靜綠意竹海森林步道"], "transportOptions": []},
+        {"id": "d4-6", "dayIndex": 4, "title": "野宮神社", "category": "sightseeing", "locationName": "野宮神社", "bulletNotes": ["黑木鳥居祈求締結良緣與旅程平安"], "transportOptions": []},
+        {"id": "d4-7", "dayIndex": 4, "title": "天龍寺", "category": "sightseeing", "locationName": "天龍寺曹源池庭園", "bulletNotes": ["參觀世界遺產曹源池名庭"], "transportOptions": []},
+        {"id": "d4-8", "dayIndex": 4, "title": "嵐山商店街", "category": "shopping", "locationName": "嵐山大街", "bulletNotes": ["選購特色手作雜貨與當季伴手禮"], "transportOptions": []},
+        {"id": "d4-9", "dayIndex": 4, "title": "嵐山特色午餐", "category": "food", "locationName": "嵐山周邊", "bulletNotes": ["品嚐清爽蕎麥麵或湯豆腐定食"], "transportOptions": []},
+        {"id": "d4-10", "dayIndex": 4, "title": "嵐山足湯放鬆", "category": "sightseeing", "locationName": "嵐電嵐山站足湯", "bulletNotes": ["站內體驗溫泉足湯，消除半日行走疲憊"], "transportOptions": []},
+        {"id": "d4-11", "dayIndex": 4, "title": "下午茶時光", "category": "food", "locationName": "嵐山咖啡店", "bulletNotes": ["抹茶糰子配當季秋季栗子蒙布朗甜品"], "transportOptions": []},
+        {"id": "d4-12", "dayIndex": 4, "title": "嵐山竹林小徑月燈路", "category": "sightseeing", "locationName": "嵐山竹林小徑", "bulletNotes": ["欣賞傍晚點燈後的夢幻竹林景色"], "transportOptions": []},
+        {"id": "d4-13", "dayIndex": 4, "title": "返回京都飯店", "category": "hotel", "locationName": "Premium Apart MONDay Kyoto Gojo", "bulletNotes": [], "transportOptions": []},
+        {"id": "d4-14", "dayIndex": 4, "title": "溫馨晚餐", "category": "food", "locationName": "京都五條周邊", "bulletNotes": [], "transportOptions": []},
+
+        {"id": "d5-1", "dayIndex": 5, "title": "晨間早餐", "category": "food", "locationName": "京都五條", "bulletNotes": [], "transportOptions": []},
+        {"id": "d5-2", "dayIndex": 5, "title": "京都飯店退房", "category": "hotel", "locationName": "Premium Apart MONDay Kyoto Gojo", "bulletNotes": ["收拾行李完成退房手續"], "transportOptions": []},
+        {"id": "d5-3", "dayIndex": 5, "title": "大阪飯店放行李", "category": "hotel", "locationName": "Welina Hotel Premier 大阪なんば", "bulletNotes": ["雙城移動至大阪難波，櫃台寄放大行李"], "transportOptions": [{"id": "t5-1", "type": "train", "description": "JR 新快速至大阪站，轉地鐵御堂筋線至難波", "durationMinutes": 60, "costJPY": 800, "costTWD": null, "isBooked": false, "notes": ["大行李搭車注意放置"]}]},
+        {"id": "d5-4", "dayIndex": 5, "title": "黑門市場晨遊", "category": "shopping", "locationName": "黑門市場", "bulletNotes": ["飯店正對面，品嚐海鮮小吃與現切水果"], "transportOptions": []},
+        {"id": "d5-5", "dayIndex": 5, "title": "難波地下街散策", "category": "shopping", "locationName": "NAMBA Walk", "bulletNotes": ["全遮雨寬敞地下街漫步選物"], "transportOptions": []},
+        {"id": "d5-6", "dayIndex": 5, "title": "午餐 - 拉麵或大阪燒", "category": "food", "locationName": "難波周邊", "bulletNotes": ["品嚐關西道地豚骨拉麵或傳統現煎大阪燒"], "transportOptions": []},
+        {"id": "d5-7", "dayIndex": 5, "title": "大阪飯店 Check-in 入住", "category": "hotel", "locationName": "Welina Hotel Premier 大阪なんば", "bulletNotes": ["領取房卡進房放置隨身物品"], "transportOptions": []},
+        {"id": "d5-8", "dayIndex": 5, "title": "天王寺 MIO 購物", "category": "shopping", "locationName": "Tennoji MIO", "bulletNotes": ["日系潮流品牌與居家服飾雜貨採買"], "transportOptions": []},
+        {"id": "d5-9", "dayIndex": 5, "title": "阿倍野 HARUKAS 300 展望台", "category": "sightseeing", "locationName": "阿倍野 HARUKAS 300 展望台", "bulletNotes": ["登上日本第一高樓俯瞰關西璀璨黃昏與百萬夜景"], "transportOptions": []},
+        {"id": "d5-10", "dayIndex": 5, "title": "天王寺商圈逛街", "category": "shopping", "locationName": "天王寺周邊", "bulletNotes": ["近鐵百貨等周邊商店漫步"], "transportOptions": []},
+        {"id": "d5-11", "dayIndex": 5, "title": "晚餐 - 居酒屋美味串燒", "category": "food", "locationName": "天王寺周邊", "bulletNotes": ["品嚐炭火現烤串燒定食"], "transportOptions": []},
+        {"id": "d5-12", "dayIndex": 5, "title": "返回難波飯店休息", "category": "hotel", "locationName": "Welina Hotel Premier 大阪なんば", "bulletNotes": [], "transportOptions": []},
+
+        {"id": "d6-1", "dayIndex": 6, "title": "活力早餐", "category": "food", "locationName": "飯店周邊", "bulletNotes": [], "transportOptions": []},
+        {"id": "d6-2", "dayIndex": 6, "title": "神戶動物王國", "category": "sightseeing", "locationName": "神戶動物王國", "bulletNotes": ["零距離接觸水豚、鯨頭鸛，觀賞精彩飛行秀"], "transportOptions": [{"id": "t6-1", "type": "train", "description": "阪神直通快速急行至神戶三宮，轉 Port Liner 電車直達", "durationMinutes": 60, "costJPY": 1020, "costTWD": null, "isBooked": false, "notes": ["動物王國站出站即達"]}]},
+        {"id": "d6-3", "dayIndex": 6, "title": "神戶三宮商店街", "category": "shopping", "locationName": "三宮 CENTER 街", "bulletNotes": ["特色神戶甜點與日系服飾挑選"], "transportOptions": []},
+        {"id": "d6-4", "dayIndex": 6, "title": "神戶美味午餐", "category": "food", "locationName": "三宮周邊", "bulletNotes": ["品嚐特選神戶牛排定食或洋食料理"], "transportOptions": []},
+        {"id": "d6-5", "dayIndex": 6, "title": "美利堅公園散步", "category": "sightseeing", "locationName": "美利堅公園", "bulletNotes": ["紅塔海港風情散步，打卡 BE KOBE 紀念地標"], "transportOptions": []},
+        {"id": "d6-6", "dayIndex": 6, "title": "返回心齋橋享用晚餐", "category": "food", "locationName": "心齋橋筋", "bulletNotes": ["享用道地心齋橋人氣美食"], "transportOptions": []},
+        {"id": "d6-7", "dayIndex": 6, "title": "返回飯店休息", "category": "hotel", "locationName": "Welina Hotel Premier 大阪なんば", "bulletNotes": [], "transportOptions": []},
+
+        {"id": "d7-1", "dayIndex": 7, "title": "晨間早餐", "category": "food", "locationName": "飯店周邊", "bulletNotes": [], "transportOptions": []},
+        {"id": "d7-2", "dayIndex": 7, "title": "大鳥神社參拜", "category": "sightseeing", "locationName": "大鳥大社", "bulletNotes": ["和泉國一之宮莊嚴古殿參拜，求旅行安全御守"], "transportOptions": [{"id": "t7-1", "type": "train", "description": "難波搭南海本線至鳳站，步行 6 分鐘", "durationMinutes": 35, "costJPY": 390, "costTWD": null, "isBooked": false, "notes": []}]},
+        {"id": "d7-3", "dayIndex": 7, "title": "午餐 - 吉次牛舌", "category": "food", "locationName": "牛たん炭火焼 吉次 心齋橋店", "bulletNotes": ["炭火香氣牛舌定食配山藥泥麥飯與牛尾湯"], "transportOptions": []},
+        {"id": "d7-4", "dayIndex": 7, "title": "心齋橋商店街主力採購", "category": "shopping", "locationName": "心齋橋筋商店街", "bulletNotes": ["藥妝零食清單比價大採買"], "transportOptions": []},
+        {"id": "d7-5", "dayIndex": 7, "title": "mooken 小泡芙午茶", "category": "food", "locationName": "心齋橋周邊", "bulletNotes": ["品嚐現烤外酥內濃郁的招牌脆皮小泡芙"], "transportOptions": []},
+        {"id": "d7-6", "dayIndex": 7, "title": "固力果跑跑人打卡", "category": "sightseeing", "locationName": "道頓堀戎橋", "bulletNotes": ["道頓堀地標跑步姿勢拍照合影"], "transportOptions": []},
+        {"id": "d7-7", "dayIndex": 7, "title": "回飯店放戰利品", "category": "hotel", "locationName": "Welina Hotel Premier 大阪なんば", "bulletNotes": ["採購戰利品全部送回房間放，雙手輕鬆"], "transportOptions": []},
+        {"id": "d7-8", "dayIndex": 7, "title": "難波車站附近 Life 超市", "category": "shopping", "locationName": "Life 超市 難波店", "bulletNotes": ["採買當季秋季長野晴王葡萄、鮮奶與伴手餅乾"], "transportOptions": []},
+        {"id": "d7-9", "dayIndex": 7, "title": "晚餐 - 難波附近燒肉大餐", "category": "food", "locationName": "難波千日前", "bulletNotes": ["大啖香嫩和牛燒肉盛合"], "transportOptions": []},
+        {"id": "d7-10", "dayIndex": 7, "title": "通天閣散步", "category": "sightseeing", "locationName": "通天閣新世界", "bulletNotes": ["感受復古大阪昭和霓虹街景氛圍"], "transportOptions": []},
+        {"id": "d7-11", "dayIndex": 7, "title": "返回飯店打包行李", "category": "hotel", "locationName": "Welina Hotel Premier 大阪なんば", "bulletNotes": ["整理行李與伴手禮，準備明日順利返台"], "transportOptions": []},
+
+        {"id": "d8-1", "dayIndex": 8, "title": "飯店退房", "category": "hotel", "locationName": "Welina Hotel Premier 大阪なんば", "bulletNotes": ["行李全數寄放飯店櫃台，輕裝出發"], "transportOptions": []},
+        {"id": "d8-2", "dayIndex": 8, "title": "活力早餐", "category": "food", "locationName": "難波周邊", "bulletNotes": [], "transportOptions": []},
+        {"id": "d8-3", "dayIndex": 8, "title": "大阪城參觀", "category": "sightseeing", "locationName": "大阪城天守閣", "bulletNotes": ["漫步大阪城公園，搭電動小火車輕鬆登頂天守閣"], "transportOptions": [{"id": "t8-1", "type": "metro", "description": "地鐵至森之宮站，轉園區環保小火車", "durationMinutes": 25, "costJPY": 300, "costTWD": null, "isBooked": false, "notes": ["長輩搭小火車輕鬆登頂"]}]},
+        {"id": "d8-4", "dayIndex": 8, "title": "午餐 - 難波車站附近", "category": "food", "locationName": "難波車站", "bulletNotes": ["享用道地關西炸豬排或烏龍麵定食"], "transportOptions": []},
+        {"id": "d8-5", "dayIndex": 8, "title": "難波八阪神社", "category": "sightseeing", "locationName": "難波八阪神社", "bulletNotes": ["震撼巨大獅子頭神殿，張口吞噬厄運、招來勝利好運"], "transportOptions": []},
+        {"id": "d8-6", "dayIndex": 8, "title": "木津市場溫泉泡湯", "category": "sightseeing", "locationName": "太平之湯 難波店", "bulletNotes": ["體驗天然露天溫泉與足湯，洗盡旅程疲憊，舒暢出發去機場"], "transportOptions": []},
+        {"id": "d8-7", "dayIndex": 8, "title": "回飯店取行李", "category": "hotel", "locationName": "Welina Hotel Premier 大阪なんば", "bulletNotes": ["提領寄放行李，稍微整理"], "transportOptions": []},
+        {"id": "d8-8", "dayIndex": 8, "title": "關西機場第一航廈", "category": "airport", "locationName": "關西國際機場第一航廈", "bulletNotes": ["搭乘南海特急 Rapi:t 直達機場", "出境免稅店採買神戶布丁與白色戀人，搭機平安返台"], "transportOptions": [{"id": "t8-2", "type": "train", "description": "南海難波站搭特急 Rapi:t 直達關西機場", "durationMinutes": 45, "costJPY": 1450, "costTWD": null, "isBooked": true, "notes": ["起飛前 2.5 小時抵達櫃台託運"]}]}
+      ],
+      "expenses": [],
+      "memos": [
+        {"id": "memo-1", "title": "回程航班資訊 (11/6)", "content": "關西機場第一航廈 ➔ 台灣，20:55 起飛。", "codeSnippet": "IT255"}
+      ],
+      "wishlist": [
+        {"id": "wish-1", "title": "合利他命 EX PLUS (270錠)", "location": "心齋橋筋藥妝店", "priceJPY": 5500, "priceTWD": 1250, "isPurchased": false}
+      ],
+      "coupons": [],
+      "checklist": [
+        {"id": "chk-1", "category": "carryon", "title": "護照正本 (效期6個月以上)", "notes": "隨身腰包攜帶", "completed": true},
+        {"id": "chk-2", "category": "carryon", "title": "日幣現金與海外信用卡", "notes": "分開放", "completed": false},
+        {"id": "chk-3", "category": "document", "title": "Visit Japan Web 入境 QR 碼截圖", "notes": "存入手機相簿", "completed": false},
+        {"id": "chk-4", "category": "luggage", "title": "常備藥品與換洗衣物", "notes": "", "completed": false}
+      ],
+      "documents": []
+    };
+
+    const DAY_METAS = [
+      { day: 1, date: "10/30", weekday: "五" },
+      { day: 2, date: "10/31", weekday: "六" },
+      { day: 3, date: "11/01", weekday: "日" },
+      { day: 4, date: "11/02", weekday: "一" },
+      { day: 5, date: "11/03", weekday: "二" },
+      { day: 6, date: "11/04", weekday: "三" },
+      { day: 7, date: "11/05", weekday: "四" },
+      { day: 8, date: "11/06", weekday: "五" }
+    ];
+
+    let tripData = null;
+    let selectedDay = 1;
+    let currentTab = 'timeline';
+    let currentWishFilter = 'all';
+    let tempWishPhotoData = null;
+    let tempDocData = null, tempDocMeta = null;
+    let db = null;
+    let sortableInstance = null;
+
+    const categoryMap = {
+      sightseeing: { label: '⛩️ 景點', color: 'bg-ghibli-softleaf text-ghibli-leaf border-ghibli-leaf/40' },
+      food: { label: '🍵 餐飲', color: 'bg-[#FBE9E2] text-ghibli-terracotta border-ghibli-terracotta/40' },
+      transport: { label: '🚄 移動', color: 'bg-ghibli-softsky text-ghibli-sky border-ghibli-sky/40' },
+      shopping: { label: '🛍️ 採購', color: 'bg-[#FBE7F0] text-[#9A4B72] border-[#E8BBD0]' },
+      hotel: { label: '🏨 住宿', color: 'bg-[#FEF5E7] text-[#B7791F] border-[#F6E05E]' },
+      airport: { label: '✈️ 機場', color: 'bg-[#EBF8FF] text-[#2B6CB0] border-[#BEE3F8]' },
+      other: { label: '🍃 其他', color: 'bg-ghibli-parchment text-ghibli-bark border-[#D6C5B2]' }
+    };
+
+    const transportIconMap = { flight: 'plane', train: 'train', metro: 'subway', bus: 'bus', taxi: 'car', walk: 'footprints', other: 'navigation' };
+    const checkCategoryNames = { carryon: '🎒 隨身重要物品', luggage: '🧳 託運行李', document: '📄 證件與單據', todo: '⏰ 行前待辦' };
+
+    function showToast(msg) {
+      const toast = document.getElementById('ghibliToast');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2200);
+    }
+
+    function copyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showToast('已複製代碼：' + text); } catch (e) { showToast('複製失敗'); }
+      document.body.removeChild(ta);
+    }
+
+    function sanitizeTripData(data) {
+      if (!data) return;
+      if (!Array.isArray(data.checklist)) data.checklist = INITIAL_SEED.checklist;
+      if (!Array.isArray(data.coupons)) data.coupons = [];
+      if (!Array.isArray(data.itinerary)) return;
+      data.itinerary.forEach(item => {
+        if (!categoryMap[item.category]) item.category = 'other';
+        if (!Array.isArray(item.bulletNotes)) item.bulletNotes = [];
+        if (!Array.isArray(item.transportOptions)) item.transportOptions = [];
+      });
+    }
+
+    function initIndexedDB() {
+      return new Promise((resolve) => {
+        try {
+          const req = indexedDB.open("GhibliKansaiDB", 2);
+          req.onupgradeneeded = (e) => {
+            const dbInstance = e.target.result;
+            if (!dbInstance.objectStoreNames.contains("files")) dbInstance.createObjectStore("files", { keyPath: "id" });
+          };
+          req.onsuccess = (e) => { db = e.target.result; resolve(db); };
+          req.onerror = () => resolve(null);
+        } catch (e) { resolve(null); }
+      });
+    }
+
+    function saveFileToDB(id, dataUrl, meta = {}) {
+      return new Promise((resolve) => {
+        if (!db) {
+          try { localStorage.setItem("blob_" + id, dataUrl); } catch(e){}
+          return resolve();
+        }
+        try {
+          const tx = db.transaction(["files"], "readwrite");
+          tx.objectStore("files").put({ id, dataUrl, ...meta });
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => resolve();
+        } catch(e) { resolve(); }
+      });
+    }
+
+    function getFileFromDB(id) {
+      return new Promise((resolve) => {
+        if (!db) return resolve(localStorage.getItem("blob_" + id) || null);
+        try {
+          const tx = db.transaction(["files"], "readonly");
+          const req = tx.objectStore("files").get(id);
+          req.onsuccess = () => resolve(req.result ? req.result.dataUrl : null);
+          req.onerror = () => resolve(null);
+        } catch(e) { resolve(null); }
+      });
+    }
+
+    function deleteFileFromDB(id) {
+      return new Promise((resolve) => {
+        if (!db) { localStorage.removeItem("blob_" + id); return resolve(); }
+        try {
+          const tx = db.transaction(["files"], "readwrite");
+          tx.objectStore("files").delete(id);
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => resolve();
+        } catch(e) { resolve(); }
+      });
+    }
+
+    async function initApp() {
+      await initIndexedDB();
+      const saved = localStorage.getItem('ghibli_trip_data_KIX2026_fixed');
+      if (saved) {
+        try { tripData = JSON.parse(saved); } catch(e) { tripData = INITIAL_SEED; }
+      } else {
+        tripData = INITIAL_SEED;
+      }
+      sanitizeTripData(tripData);
+      saveData();
+
+      renderDayTabs();
+      renderTimeline();
+      renderWishlist();
+      renderCoupons();
+      renderChecklist();
+      renderExpenses();
+      renderMemos();
+      renderDocuments();
+      lucide.createIcons();
+
+      // 安全註冊 Service Worker（僅在 HTTP/HTTPS 環境下啟用，避免本機 file:// 衝突）
+      if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+        const swScript = `
+          const CACHE_NAME = 'ghibli-trip-cache-v2';
+          self.addEventListener('install', e => { self.skipWaiting(); });
+          self.addEventListener('activate', e => { e.waitUntil(clients.claim()); });
+          self.addEventListener('fetch', e => {
+            if (e.request.method !== 'GET') return;
+            e.respondWith(
+              caches.match(e.request).then(cached => cached || fetch(e.request).catch(() => cached))
+            );
+          });
+        `;
+        try {
+          const blob = new Blob([swScript], { type: 'application/javascript' });
+          navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+        } catch(e) {}
+      }
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      ['timeline', 'wishlist', 'checklist', 'expenses', 'memos'].forEach(t => {
+        const sec = document.getElementById(`tab-${t}`);
+        const nav = document.getElementById(`nav-${t}`);
+        if (sec) {
+          sec.classList.toggle('hidden', t !== tab);
+          if (t === tab) sec.classList.add('tab-content');
+        }
+        if (nav) {
+          if (t === tab) {
+            nav.className = 'btn-ghibli flex flex-col items-center gap-0.5 text-ghibli-moss font-bold text-[10.5px]';
+            nav.querySelector('div').className = 'p-1 rounded-xl bg-ghibli-moss/10';
+          } else {
+            nav.className = 'btn-ghibli flex flex-col items-center gap-0.5 text-ghibli-bark/60 font-medium text-[10.5px]';
+            nav.querySelector('div').className = 'p-1 rounded-xl hover:bg-ghibli-parchment';
+          }
+        }
+      });
+      document.getElementById('daySelectorContainer').style.display = (tab === 'timeline') ? 'block' : 'none';
+      if (tab === 'timeline') renderTimeline();
+      if (tab === 'wishlist') { renderWishlist(); renderCoupons(); }
+      if (tab === 'checklist') renderChecklist();
+      if (tab === 'expenses') renderExpenses();
+      if (tab === 'memos') { renderMemos(); renderDocuments(); }
+      lucide.createIcons();
+    }
+
+    function renderDayTabs() {
+      const container = document.getElementById('dayTabs');
+      container.innerHTML = '';
+      DAY_METAS.forEach(m => {
+        const isSel = selectedDay === m.day;
+        const btn = document.createElement('button');
+        btn.className = `px-3.5 py-1.5 rounded-2xl text-xs font-bold whitespace-nowrap btn-ghibli flex flex-col items-center gap-0.5 ${
+          isSel ? 'bg-ghibli-moss text-white shadow-ghibli-sm scale-105 border border-ghibli-moss/40' : 'bg-[#FFFDF9] text-ghibli-bark/80 border border-[#DECDBB] hover:bg-[#FAF5EC]'
+        }`;
+        btn.innerHTML = `<span class="font-serif">Day ${m.day}</span><span class="${isSel ? 'text-ghibli-softleaf text-[10px]' : 'text-ghibli-bark/50 text-[10px]'}">${m.date} (${m.weekday})</span>`;
+        btn.onclick = () => { selectedDay = m.day; renderDayTabs(); renderTimeline(); };
+        container.appendChild(btn);
+      });
+    }
+
+    function formatDualCost(jpy, twd) {
+      const parts = [];
+      if (jpy !== null && jpy !== undefined && jpy !== '' && !isNaN(jpy) && Number(jpy) > 0) parts.push(`¥${Number(jpy).toLocaleString()}`);
+      if (twd !== null && twd !== undefined && twd !== '' && !isNaN(twd) && Number(twd) > 0) parts.push(`NT$${Number(twd).toLocaleString()}`);
+      return parts.length > 0 ? parts.join(' + ') : '免車資 / 漫步';
+    }
+
+    function renderTimeline() {
+      const list = document.getElementById('timelineList');
+      list.innerHTML = '';
+      const items = tripData.itinerary.filter(i => i.dayIndex === selectedDay);
+      const meta = DAY_METAS[selectedDay - 1];
+
+      document.getElementById('currentDayDateSub').innerText = `Day ${selectedDay} · ${meta.date} (${meta.weekday})`;
+
+      if (items.length === 0) {
+        list.innerHTML = `<div class="ghibli-border bg-[#FFFDF9] p-8 text-center text-xs text-ghibli-bark/50">🍃 今日尚未安排活動。</div>`;
+        return;
+      }
+
+      items.forEach((item, index) => {
+        const cat = categoryMap[item.category] || categoryMap.other;
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.locationName || item.title)}`;
+        const card = document.createElement('div');
+        card.className = "relative pl-7 z-10 timeline-item-row";
+        card.setAttribute('data-id', item.id);
+
+        const dot = `<div class="absolute left-3.5 top-5 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-[#FAF6EE] bg-ghibli-moss shadow-sm flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-white"></div></div>`;
+
+        let transportListHtml = '';
+        const transOpts = item.transportOptions || [];
+
+        if (transOpts.length > 0) {
+          transportListHtml = `
+            <div class="space-y-1.5 mb-2.5">
+              ${transOpts.map(opt => {
+                const tIcon = transportIconMap[opt.type] || 'navigation';
+                const isTaxi = opt.type === 'taxi';
+                const optNotesArr = Array.isArray(opt.notes) ? opt.notes : (opt.notes ? [opt.notes] : []);
+                return `
+                  <div class="p-2.5 rounded-2xl border border-dashed transition hover:shadow-ghibli-sm ${isTaxi ? 'bg-[#FFF7E8] border-[#E8D2AC]' : 'bg-[#F9F4EB] border-[#DECDBB]'} text-[11px] flex items-start justify-between gap-2">
+                    <div class="flex items-start gap-2 flex-1 min-w-0">
+                      <div class="p-1.5 rounded-xl ${isTaxi ? 'bg-ghibli-amber/20 text-ghibli-amber' : 'bg-white text-ghibli-moss'} shrink-0 shadow-sm mt-0.5">
+                        <i data-lucide="${tIcon}" class="w-3.5 h-3.5"></i>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <div class="font-bold text-ghibli-bark flex items-center gap-1.5 flex-wrap">
+                          <span>${opt.description}</span>
+                          ${opt.isBooked ? '<span class="text-[9px] bg-ghibli-moss/10 text-ghibli-moss px-1.5 py-0.2 rounded font-bold">✓已劃位</span>' : ''}
+                        </div>
+                        <div class="text-[10px] text-ghibli-bark/60 mt-0.5 flex flex-wrap gap-x-2">
+                          ${opt.durationMinutes ? `<span class="bg-white/90 px-1 py-0.2 rounded border border-[#DECDBB]">⏱️ ${opt.durationMinutes} 分鐘</span>` : ''}
+                          <span class="font-bold text-ghibli-terracotta">${formatDualCost(opt.costJPY, opt.costTWD)}</span>
+                        </div>
+                        ${optNotesArr.length > 0 ? `
+                          <div class="mt-1 bg-white/80 p-1.5 rounded-lg border border-[#E7DCcb] space-y-0.5">
+                            ${optNotesArr.map(n => `<div class="flex items-start gap-1 text-[10px] text-ghibli-bark/80"><span class="text-ghibli-moss font-bold">•</span><span>${n}</span></div>`).join('')}
+                          </div>
+                        ` : ''}
+                        ${opt.url ? `
+                          <div class="mt-1">
+                            <a href="${opt.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] font-bold text-ghibli-sky hover:underline bg-ghibli-softsky/80 px-2 py-0.5 rounded-md">
+                              <i data-lucide="external-link" class="w-3 h-3"></i> 乘車指南/官方連結
+                            </a>
+                          </div>
+                        ` : ''}
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0 pt-0.5">
+                      <button onclick="openEditTransportModal('${item.id}', '${opt.id}')" class="btn-ghibli p-1 text-ghibli-moss"><i data-lucide="edit-3" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="deleteTransportOptionDirect('${item.id}', '${opt.id}')" class="btn-ghibli p-1 text-ghibli-terracotta/70"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+              <button onclick="openAddTransportModal('${item.id}')" class="w-full py-1.5 px-3 rounded-2xl border border-dashed border-[#DECDBB] text-[10px] text-ghibli-leaf font-bold flex items-center justify-center gap-1">
+                <i data-lucide="plus" class="w-3 h-3"></i> 新增接駁交通
+              </button>
+            </div>
+          `;
+        } else {
+          transportListHtml = `
+            <div class="mb-2.5">
+              <button onclick="openAddTransportModal('${item.id}')" class="w-full py-1.5 px-3 rounded-2xl border border-dashed border-[#DECDBB] text-[10px] text-ghibli-bark/50 hover:text-ghibli-moss flex items-center justify-between">
+                <span class="flex items-center gap-1"><i data-lucide="plus" class="w-3 h-3"></i> 設定前往此處的接駁交通...</span>
+                <span class="font-bold text-ghibli-moss">+ 接駁</span>
+              </button>
+            </div>
+          `;
+        }
+
+        let bulletNotesHtml = '';
+        const notesArr = Array.isArray(item.bulletNotes) ? item.bulletNotes : [];
+        if (notesArr.length > 0) {
+          bulletNotesHtml = `
+            <div class="mt-2.5 bg-[#FAF6EE] p-2.5 rounded-xl border border-[#EBE1D3] space-y-1">
+              <div class="text-[10px] font-bold text-ghibli-leaf flex items-center gap-1">
+                <i data-lucide="notepad-text" class="w-3 h-3"></i> 溫馨手記：
+              </div>
+              <ul class="space-y-1 text-xs text-ghibli-bark/85 pl-1">
+                ${notesArr.map(n => `<li class="flex items-start gap-1.5"><span class="text-ghibli-terracotta font-bold">•</span><span class="flex-1">${n}</span></li>`).join('')}
+              </ul>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          ${dot}
+          ${transportListHtml}
+          <div class="ghibli-border bg-[#FFFDF9] p-3.5 shadow-ghibli-sm hover:shadow-ghibli transition">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-start gap-1.5 flex-1 min-w-0">
+                <div class="drag-handle p-1 text-ghibli-bark/30 hover:text-ghibli-moss cursor-grab active:cursor-grabbing rounded hover:bg-[#F3EDE2] shrink-0 mt-0.5" title="長按拖曳排序">
+                  <i data-lucide="grip-vertical" class="w-4 h-4"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="stamp-badge ${cat.color}">${cat.label}</span>
+                  </div>
+                  <h4 class="text-sm font-bold font-serif text-ghibli-bark mt-1 tracking-tight">${item.title}</h4>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button onclick="moveItemOrder('${item.id}', -1)" ${index === 0 ? 'disabled' : ''} class="p-1 text-ghibli-bark/40 hover:text-ghibli-moss disabled:opacity-20 rounded hover:bg-[#F4ECE1]"><i data-lucide="chevron-up" class="w-4 h-4"></i></button>
+                <button onclick="moveItemOrder('${item.id}', 1)" ${index === items.length - 1 ? 'disabled' : ''} class="p-1 text-ghibli-bark/40 hover:text-ghibli-moss disabled:opacity-20 rounded hover:bg-[#F4ECE1]"><i data-lucide="chevron-down" class="w-4 h-4"></i></button>
+                <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="p-1.5 bg-[#FAF4EB] text-ghibli-moss rounded-xl border border-[#DECDBB]"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i></a>
+              </div>
+            </div>
+            ${bulletNotesHtml}
+            <div class="mt-2.5 pt-2 border-t border-[#F0E5D5] flex items-center justify-between text-[11px] text-ghibli-bark/60">
+              <span class="truncate">📍 ${item.locationName || '未指定地點'}</span>
+              <div class="flex items-center gap-2 shrink-0">
+                <button onclick="openEditItemModal('${item.id}')" class="text-ghibli-bark/70 hover:text-ghibli-moss font-bold flex items-center gap-0.5"><i data-lucide="pencil" class="w-3 h-3"></i> 編輯</button>
+                <button onclick="quickAddExpense('${item.title}')" class="text-ghibli-terracotta hover:underline font-bold flex items-center gap-0.5"><i data-lucide="receipt" class="w-3 h-3"></i> 記為花費</button>
+              </div>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+
+      if (sortableInstance) sortableInstance.destroy();
+      sortableInstance = new Sortable(list, {
+        handle: '.drag-handle',
+        animation: 180,
+        ghostClass: 'opacity-40',
+        onEnd: function () {
+          const domIds = Array.from(list.querySelectorAll('.timeline-item-row')).map(el => el.getAttribute('data-id'));
+          const currentDayItems = tripData.itinerary.filter(i => i.dayIndex === selectedDay);
+          const otherDaysItems = tripData.itinerary.filter(i => i.dayIndex !== selectedDay);
+          const reordered = domIds.map(id => currentDayItems.find(i => i.id === id)).filter(Boolean);
+          tripData.itinerary = [...otherDaysItems, ...reordered];
+          saveData();
+          renderTimeline();
+          showToast('行程順序已更新！');
+        }
+      });
+      lucide.createIcons();
+    }
+
+    function moveItemOrder(itemId, dir) {
+      const dayItems = tripData.itinerary.filter(i => i.dayIndex === selectedDay);
+      const currIdx = dayItems.findIndex(i => i.id === itemId);
+      if (currIdx === -1) return;
+      const targetIdx = currIdx + dir;
+      if (targetIdx < 0 || targetIdx >= dayItems.length) return;
+      const temp = dayItems[currIdx];
+      dayItems[currIdx] = dayItems[targetIdx];
+      dayItems[targetIdx] = temp;
+      const otherDays = tripData.itinerary.filter(i => i.dayIndex !== selectedDay);
+      tripData.itinerary = [...otherDays, ...dayItems].sort((a, b) => a.dayIndex - b.dayIndex);
+      saveData();
+      renderTimeline();
+      showToast('順序調整成功');
+    }
+
+    // 條列式備忘管理
+    function renderBulletNotesInputs(notes = []) {
+      const container = document.getElementById('bulletNotesContainer');
+      container.innerHTML = '';
+      if (notes.length === 0) notes = [''];
+      notes.forEach((text) => {
+        const row = document.createElement('div');
+        row.className = "flex items-center gap-1.5 note-input-row";
+        row.innerHTML = `
+          <span class="text-ghibli-terracotta font-bold text-xs">•</span>
+          <input type="text" class="bullet-note-val flex-1 p-2 border border-[#DECDBB] rounded-xl bg-white text-xs" placeholder="輸入一項備忘或提醒..." value="${text.replace(/"/g, '&quot;')}">
+          <button type="button" onclick="removeNoteRow(this)" class="btn-ghibli p-2 text-ghibli-bark/40 hover:text-ghibli-terracotta rounded-xl"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+        `;
+        container.appendChild(row);
+      });
+      lucide.createIcons();
+    }
+
+    function addNoteRow(val = '') {
+      const container = document.getElementById('bulletNotesContainer');
+      const row = document.createElement('div');
+      row.className = "flex items-center gap-1.5 note-input-row";
+      row.innerHTML = `
+        <span class="text-ghibli-terracotta font-bold text-xs">•</span>
+        <input type="text" class="bullet-note-val flex-1 p-2 border border-[#DECDBB] rounded-xl bg-white text-xs" placeholder="輸入一項備忘或提醒..." value="${val}">
+        <button type="button" onclick="removeNoteRow(this)" class="btn-ghibli p-2 text-ghibli-bark/40 hover:text-ghibli-terracotta rounded-xl"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+      `;
+      container.appendChild(row);
+      lucide.createIcons();
+    }
+
+    function removeNoteRow(btn) {
+      const container = document.getElementById('bulletNotesContainer');
+      if (container.children.length > 1) btn.closest('.note-input-row').remove();
+      else btn.closest('.note-input-row').querySelector('.bullet-note-val').value = '';
+    }
+
+    function getBulletNotesFromModal() {
+      const inputs = document.querySelectorAll('.bullet-note-val');
+      const notes = [];
+      inputs.forEach(input => {
+        const v = input.value.trim();
+        if (v) notes.push(v);
+      });
+      return notes;
+    }
+
+    // 交通備忘條列管理
+    function renderTransNotesInputs(notes = []) {
+      const container = document.getElementById('transNotesContainer');
+      container.innerHTML = '';
+      if (notes.length === 0) notes = [''];
+      notes.forEach((text) => {
+        const row = document.createElement('div');
+        row.className = "flex items-center gap-1.5 trans-note-input-row";
+        row.innerHTML = `
+          <span class="text-ghibli-moss font-bold text-xs">•</span>
+          <input type="text" class="trans-note-val flex-1 p-1.5 border border-[#DECDBB] rounded-xl bg-white text-xs" placeholder="交通提醒..." value="${text.replace(/"/g, '&quot;')}">
+          <button type="button" onclick="removeTransNoteRow(this)" class="btn-ghibli p-1.5 text-ghibli-bark/40 hover:text-ghibli-terracotta rounded-xl"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+        `;
+        container.appendChild(row);
+      });
+      lucide.createIcons();
+    }
+
+    function addTransNoteRow(val = '') {
+      const container = document.getElementById('transNotesContainer');
+      const row = document.createElement('div');
+      row.className = "flex items-center gap-1.5 trans-note-input-row";
+      row.innerHTML = `
+        <span class="text-ghibli-moss font-bold text-xs">•</span>
+        <input type="text" class="trans-note-val flex-1 p-1.5 border border-[#DECDBB] rounded-xl bg-white text-xs" placeholder="交通提醒..." value="${val}">
+        <button type="button" onclick="removeTransNoteRow(this)" class="btn-ghibli p-1.5 text-ghibli-bark/40 hover:text-ghibli-terracotta rounded-xl"><i data-lucide="x" class="w-3.5 h-3.5"></i></button>
+      `;
+      container.appendChild(row);
+      lucide.createIcons();
+    }
+
+    function removeTransNoteRow(btn) {
+      const container = document.getElementById('transNotesContainer');
+      if (container.children.length > 1) btn.closest('.trans-note-input-row').remove();
+      else btn.closest('.trans-note-input-row').querySelector('.trans-note-val').value = '';
+    }
+
+    function getTransNotesFromModal() {
+      const inputs = document.querySelectorAll('.trans-note-val');
+      const notes = [];
+      inputs.forEach(input => {
+        const v = input.value.trim();
+        if (v) notes.push(v);
+      });
+      return notes;
+    }
+
+    // 行程 CRUD
+    function openAddItemModal() {
+      document.getElementById('itinModalTitle').innerText = `新增 Day ${selectedDay} 活動`;
+      document.getElementById('itinItemId').value = '';
+      document.getElementById('itinDay').value = selectedDay;
+      document.getElementById('itinCategory').value = 'sightseeing';
+      document.getElementById('itinTitle').value = '';
+      document.getElementById('itinLocation').value = '';
+      renderBulletNotesInputs([]);
+      document.getElementById('btnDeleteItin').classList.add('hidden');
+      openModal('itineraryModal');
+    }
+
+    function openEditItemModal(id) {
+      const item = tripData.itinerary.find(i => i.id === id);
+      if (!item) return;
+      document.getElementById('itinModalTitle').innerText = '編輯活動內容';
+      document.getElementById('itinItemId').value = item.id;
+      document.getElementById('itinDay').value = item.dayIndex;
+      document.getElementById('itinCategory').value = item.category || 'sightseeing';
+      document.getElementById('itinTitle').value = item.title || '';
+      document.getElementById('itinLocation').value = item.locationName || '';
+      renderBulletNotesInputs(item.bulletNotes || []);
+      document.getElementById('btnDeleteItin').classList.remove('hidden');
+      openModal('itineraryModal');
+    }
+
+    function saveItinItem() {
+      const id = document.getElementById('itinItemId').value;
+      const dayIndex = parseInt(document.getElementById('itinDay').value);
+      const title = document.getElementById('itinTitle').value.trim();
+      const category = document.getElementById('itinCategory').value;
+      const locationName = document.getElementById('itinLocation').value.trim();
+      const bulletNotes = getBulletNotesFromModal();
+
+      if (!title) return showToast('請填寫活動標題！');
+
+      if (id) {
+        const idx = tripData.itinerary.findIndex(i => i.id === id);
+        if (idx !== -1) {
+          tripData.itinerary[idx] = { ...tripData.itinerary[idx], dayIndex, title, category, locationName, bulletNotes };
+        }
+      } else {
+        tripData.itinerary.push({ id: 'user-' + Date.now(), dayIndex, title, category, locationName, bulletNotes, transportOptions: [] });
+      }
+      saveData();
+      selectedDay = dayIndex;
+      renderDayTabs();
+      renderTimeline();
+      closeModal('itineraryModal');
+      showToast('活動已儲存');
+    }
+
+    function deleteCurrentItinItem() {
+      const id = document.getElementById('itinItemId').value;
+      if (id) {
+        tripData.itinerary = tripData.itinerary.filter(i => i.id !== id);
+        saveData();
+        renderTimeline();
+        closeModal('itineraryModal');
+        showToast('已刪除活動');
+      }
+    }
+
+    // 交通方案 CRUD
+    function openAddTransportModal(itinId) {
+      document.getElementById('transModalTitle').innerText = '新增接駁交通方案';
+      document.getElementById('transTargetItinId').value = itinId;
+      document.getElementById('transTargetOptId').value = '';
+      document.getElementById('transOptType').value = 'train';
+      document.getElementById('transOptDuration').value = '';
+      document.getElementById('transOptDesc').value = '';
+      document.getElementById('transOptUrl').value = '';
+      renderTransNotesInputs([]);
+      document.getElementById('transOptCostJPY').value = '';
+      document.getElementById('transOptCostTWD').value = '';
+      document.getElementById('transOptBooked').checked = false;
+      document.getElementById('btnDeleteTransOpt').classList.add('hidden');
+      openModal('transportEditModal');
+    }
+
+    function openEditTransportModal(itinId, optId) {
+      const item = tripData.itinerary.find(i => i.id === itinId);
+      if (!item) return;
+      const opt = (item.transportOptions || []).find(o => o.id === optId);
+      if (!opt) return;
+
+      document.getElementById('transModalTitle').innerText = '編輯交通方案';
+      document.getElementById('transTargetItinId').value = itinId;
+      document.getElementById('transTargetOptId').value = opt.id;
+      document.getElementById('transOptType').value = opt.type || 'train';
+      document.getElementById('transOptDuration').value = opt.durationMinutes || '';
+      document.getElementById('transOptDesc').value = opt.description || '';
+      document.getElementById('transOptUrl').value = opt.url || '';
+      renderTransNotesInputs(Array.isArray(opt.notes) ? opt.notes : (opt.notes ? [opt.notes] : []));
+      document.getElementById('transOptCostJPY').value = opt.costJPY ?? '';
+      document.getElementById('transOptCostTWD').value = opt.costTWD ?? '';
+      document.getElementById('transOptBooked').checked = !!opt.isBooked;
+      document.getElementById('btnDeleteTransOpt').classList.remove('hidden');
+      openModal('transportEditModal');
+    }
+
+    function saveTransportOption() {
+      const itinId = document.getElementById('transTargetItinId').value;
+      const optId = document.getElementById('transTargetOptId').value;
+      const item = tripData.itinerary.find(i => i.id === itinId);
+      if (!item) return;
+
+      const desc = document.getElementById('transOptDesc').value.trim();
+      if (!desc) return showToast('請填寫方案說明！');
+
+      if (!Array.isArray(item.transportOptions)) item.transportOptions = [];
+
+      const newOpt = {
+        id: optId || ('trans-' + Date.now()),
+        type: document.getElementById('transOptType').value,
+        description: desc,
+        durationMinutes: document.getElementById('transOptDuration').value ? parseInt(document.getElementById('transOptDuration').value) : null,
+        url: document.getElementById('transOptUrl').value.trim(),
+        notes: getTransNotesFromModal(),
+        costJPY: document.getElementById('transOptCostJPY').value ? parseFloat(document.getElementById('transOptCostJPY').value) : null,
+        costTWD: document.getElementById('transOptCostTWD').value ? parseFloat(document.getElementById('transOptCostTWD').value) : null,
+        isBooked: document.getElementById('transOptBooked').checked
+      };
+
+      if (optId) {
+        const idx = item.transportOptions.findIndex(o => o.id === optId);
+        if (idx !== -1) item.transportOptions[idx] = newOpt;
+      } else {
+        item.transportOptions.push(newOpt);
+      }
+
+      saveData();
+      renderTimeline();
+      closeModal('transportEditModal');
+      showToast('交通方案已更新');
+    }
+
+    function deleteCurrentTransportOption() {
+      const itinId = document.getElementById('transTargetItinId').value;
+      const optId = document.getElementById('transTargetOptId').value;
+      deleteTransportOptionDirect(itinId, optId);
+      closeModal('transportEditModal');
+    }
+
+    function deleteTransportOptionDirect(itinId, optId) {
+      const item = tripData.itinerary.find(i => i.id === itinId);
+      if (!item || !Array.isArray(item.transportOptions)) return;
+      item.transportOptions = item.transportOptions.filter(o => o.id !== optId);
+      saveData();
+      renderTimeline();
+      showToast('已刪除該方案');
+    }
+
+    // 採購圖鑑
+    async function renderWishlist() {
+      const container = document.getElementById('wishlistContainer');
+      container.innerHTML = '';
+      const items = tripData.wishlist || [];
+      const purchased = items.filter(i => i.isPurchased).length;
+      let totalJPY = 0, totalTWD = 0;
+      items.forEach(i => {
+        if (i.priceJPY) totalJPY += Number(i.priceJPY);
+        if (i.priceTWD) totalTWD += Number(i.priceTWD);
+      });
+
+      document.getElementById('wishlistStatsCount').innerText = `${purchased} / ${items.length} 件`;
+      document.getElementById('wishlistStatsPercent').innerText = `完成 ${items.length > 0 ? Math.round((purchased/items.length)*100) : 0}%`;
+      document.getElementById('wishlistTotalJPY').innerText = `¥ ${totalJPY.toLocaleString()}`;
+      document.getElementById('wishlistTotalTWD').innerText = totalTWD.toLocaleString();
+
+      let filtered = items;
+      if (currentWishFilter !== 'all') filtered = items.filter(i => (i.location || '').includes(currentWishFilter));
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-full ghibli-border bg-[#FFFDF9] p-8 text-center text-xs text-ghibli-bark/50">🌾 尚無商品記錄。</div>`;
+        return;
+      }
+
+      for (const item of filtered) {
+        const card = document.createElement('div');
+        card.className = `ghibli-border bg-[#FFFDF9] p-3.5 shadow-ghibli-sm transition flex flex-col justify-between relative overflow-hidden ${item.isPurchased ? 'opacity-75 bg-[#F4F8F5]' : ''}`;
+
+        let photoSrc = item.photoId ? await getFileFromDB(item.photoId) : null;
+        const photoHtml = photoSrc ? `<div class="polaroid-frame mb-2.5 h-32 flex items-center justify-center cursor-pointer" onclick="viewPhoto('${photoSrc}', '${item.title}')"><img src="${photoSrc}" class="w-full h-full object-cover rounded"></div>` : '';
+
+        const purchasedStamp = item.isPurchased ? `<div class="absolute -right-3 -top-3 w-14 h-14 rounded-full border-2 border-dashed border-ghibli-moss text-ghibli-moss flex items-center justify-center text-[10px] font-black rotate-12 bg-white/80 pointer-events-none">済·購入</div>` : '';
+
+        card.innerHTML = `
+          ${purchasedStamp}
+          <div>
+            ${photoHtml}
+            <div class="flex items-start justify-between gap-1.5">
+              <label class="flex items-start gap-2 cursor-pointer flex-1">
+                <input type="checkbox" ${item.isPurchased ? 'checked' : ''} onchange="toggleWish('${item.id}')" class="w-4 h-4 rounded text-ghibli-moss focus:ring-0 mt-0.5 shrink-0">
+                <span class="font-bold text-xs text-ghibli-bark ${item.isPurchased ? 'line-through text-ghibli-bark/50' : ''}">${item.title}</span>
+              </label>
+              <span class="text-xs font-black text-ghibli-terracotta shrink-0">${formatDualCost(item.priceJPY, item.priceTWD)}</span>
+            </div>
+            <div class="mt-1.5 flex items-center justify-between text-[11px] text-ghibli-bark/60">
+              <span class="truncate">📍 ${item.location || '店鋪未指定'}</span>
+            </div>
+          </div>
+          <div class="mt-2.5 pt-2 border-t border-[#F0E5D5] flex items-center justify-between text-[11px]">
+            <button onclick="quickWishToExpense('${item.id}')" class="text-ghibli-moss hover:underline font-bold flex items-center gap-1"><i data-lucide="receipt" class="w-3 h-3"></i> 轉入花費</button>
+            <div class="flex items-center gap-2">
+              <button onclick="openEditWishModal('${item.id}')" class="text-ghibli-bark/60 hover:text-ghibli-moss font-bold">編輯</button>
+              <button onclick="deleteWishItem('${item.id}')" class="text-ghibli-bark/40 hover:text-ghibli-terracotta font-bold">刪除</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      }
+      lucide.createIcons();
+    }
+
+    function filterWishlist(loc) {
+      currentWishFilter = loc;
+      document.querySelectorAll('.wish-filter-btn').forEach(btn => {
+        btn.className = btn.getAttribute('data-loc') === loc ? 'wish-filter-btn px-3 py-1.5 rounded-full font-bold bg-ghibli-moss text-white shadow-ghibli-sm' : 'wish-filter-btn px-3 py-1.5 rounded-full font-bold bg-[#FFFDF9] text-ghibli-bark border border-[#DECDBB]';
+      });
+      renderWishlist();
+    }
+
+    async function handleCouponUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (ev) => {
+        const id = 'coupon-' + Date.now();
+        await saveFileToDB(id, ev.target.result, { name: file.name });
+        if (!tripData.coupons) tripData.coupons = [];
+        tripData.coupons.push({ id, name: file.name.replace(/\.[^/.]+$/, ""), fileId: id });
+        saveData();
+        renderCoupons();
+        showToast('折價券已加入！');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function renderCoupons() {
+      const container = document.getElementById('couponsList');
+      if (!container) return;
+      container.innerHTML = '';
+      const list = tripData.coupons || [];
+      if (list.length === 0) {
+        container.innerHTML = `<span class="text-[10px] text-ghibli-bark/50 italic py-1">尚無折價券，點擊右上角新增。</span>`;
+        return;
+      }
+      for (const coup of list) {
+        const src = await getFileFromDB(coup.fileId);
+        if (!src) continue;
+        const div = document.createElement('div');
+        div.className = "flex-shrink-0 w-24 ghibli-border bg-white p-1.5 shadow-sm text-center relative";
+        div.innerHTML = `
+          <div class="h-14 w-full bg-[#FAF6EE] rounded overflow-hidden flex items-center justify-center cursor-pointer" onclick="viewPhoto('${src}', '${coup.name}')">
+            <img src="${src}" class="w-full h-full object-cover">
+          </div>
+          <span class="text-[10px] font-bold text-ghibli-bark truncate block mt-1">${coup.name}</span>
+          <button onclick="deleteCoupon('${coup.id}')" class="absolute -top-1 -right-1 bg-ghibli-terracotta text-white rounded-full w-4 h-4 flex items-center justify-center text-[9px] shadow">×</button>
+        `;
+        container.appendChild(div);
+      }
+      lucide.createIcons();
+    }
+
+    function deleteCoupon(id) {
+      deleteFileFromDB(id);
+      tripData.coupons = (tripData.coupons || []).filter(c => c.id !== id);
+      saveData();
+      renderCoupons();
+      showToast('已刪除折價券');
+    }
+
+    function openAddWishlistModal() {
+      document.getElementById('wishModalTitle').innerText = '新增好物';
+      document.getElementById('wishItemId').value = '';
+      document.getElementById('wishTitle').value = '';
+      document.getElementById('wishLocation').value = '';
+      document.getElementById('wishPriceJPY').value = '';
+      document.getElementById('wishPriceTWD').value = '';
+      document.getElementById('wishPurchased').value = 'false';
+      clearWishPhoto();
+      openModal('wishlistModal');
+    }
+
+    function openEditWishModal(id) {
+      const item = tripData.wishlist.find(w => w.id === id);
+      if (!item) return;
+      document.getElementById('wishModalTitle').innerText = '編輯好物';
+      document.getElementById('wishItemId').value = item.id;
+      document.getElementById('wishTitle').value = item.title;
+      document.getElementById('wishLocation').value = item.location;
+      document.getElementById('wishPriceJPY').value = item.priceJPY ?? '';
+      document.getElementById('wishPriceTWD').value = item.priceTWD ?? '';
+      document.getElementById('wishPurchased').value = item.isPurchased ? 'true' : 'false';
+      document.getElementById('btnDeleteWish').classList.remove('hidden');
+      openModal('wishlistModal');
+    }
+
+    async function saveWishItem() {
+      const id = document.getElementById('wishItemId').value;
+      const title = document.getElementById('wishTitle').value.trim();
+      const location = document.getElementById('wishLocation').value.trim();
+      if (!title || !location) return showToast('請填寫商品名稱與地點！');
+
+      let photoId = null;
+      if (tempWishPhotoData) {
+        photoId = 'photo-wish-' + Date.now();
+        await saveFileToDB(photoId, tempWishPhotoData);
+      }
+      if (!tripData.wishlist) tripData.wishlist = [];
+
+      if (id) {
+        const idx = tripData.wishlist.findIndex(w => w.id === id);
+        if (idx !== -1) {
+          tripData.wishlist[idx] = { 
+            ...tripData.wishlist[idx], title, location, 
+            priceJPY: parseFloat(document.getElementById('wishPriceJPY').value) || 0,
+            priceTWD: parseFloat(document.getElementById('wishPriceTWD').value) || 0,
+            isPurchased: document.getElementById('wishPurchased').value === 'true',
+            ...(photoId ? { photoId } : {})
+          };
+        }
+      } else {
+        tripData.wishlist.push({
+          id: 'wish-' + Date.now(), title, location,
+          priceJPY: parseFloat(document.getElementById('wishPriceJPY').value) || 0,
+          priceTWD: parseFloat(document.getElementById('wishPriceTWD').value) || 0,
+          isPurchased: document.getElementById('wishPurchased').value === 'true',
+          photoId
+        });
+      }
+      saveData();
+      renderWishlist();
+      closeModal('wishlistModal');
+      showToast('好物已收納！');
+    }
+
+    function toggleWish(id) {
+      const item = tripData.wishlist.find(w => w.id === id);
+      if (item) {
+        item.isPurchased = !item.isPurchased;
+        saveData();
+        renderWishlist();
+      }
+    }
+
+    function deleteWishItem(id) {
+      tripData.wishlist = tripData.wishlist.filter(w => w.id !== id);
+      saveData();
+      renderWishlist();
+      showToast('已自圖鑑移除');
+    }
+
+    function deleteCurrentWishItem() {
+      const id = document.getElementById('wishItemId').value;
+      if (id) { deleteWishItem(id); closeModal('wishlistModal'); }
+    }
+
+    function handleWishPhotoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        tempWishPhotoData = ev.target.result;
+        document.getElementById('wishPhotoPreviewContainer').classList.remove('hidden');
+        document.getElementById('wishPhotoPreviewImg').src = tempWishPhotoData;
+      };
+      reader.readAsDataURL(file);
+    }
+    function clearWishPhoto() {
+      tempWishPhotoData = null;
+      document.getElementById('wishPhotoPreviewContainer').classList.add('hidden');
+    }
+
+    function quickWishToExpense(id) {
+      const item = tripData.wishlist.find(w => w.id === id);
+      if (!item) return;
+      tripData.expenses.push({
+        id: 'exp-' + Date.now(),
+        title: '採購：' + item.title,
+        category: '採購',
+        payMethod: '刷卡',
+        amountJPY: item.priceJPY || 0,
+        amountTWD: item.priceTWD || 0,
+        paidBy: '彥如',
+        splitAmong: tripData.members
+      });
+      item.isPurchased = true;
+      saveData();
+      renderWishlist();
+      renderExpenses();
+      showToast('已轉入帳本！');
+    }
+
+    function quickAddExpense(title) {
+      document.getElementById('expTitle').value = title;
+      document.getElementById('expAmountJPY').value = '';
+      document.getElementById('expAmountTWD').value = '';
+      document.getElementById('expCategory').value = '景點';
+      document.getElementById('expPayMethod').value = '現金';
+      openModal('expenseModal');
+    }
+
+    // 準備清單
+    function renderChecklist() {
+      const container = document.getElementById('checklistContainer');
+      container.innerHTML = '';
+      const list = tripData.checklist || [];
+      const total = list.length;
+      const done = list.filter(c => c.completed).length;
+      document.getElementById('checklistProgressText').innerText = `完成 ${done} / ${total} 項 (${total>0 ? Math.round((done/total)*100) : 0}%)`;
+
+      ['carryon', 'document', 'luggage', 'todo'].forEach(catKey => {
+        const subItems = list.filter(c => c.category === catKey);
+        if (subItems.length === 0) return;
+
+        const groupDiv = document.createElement('div');
+        groupDiv.className = "ghibli-border bg-[#FFFDF9] p-3 shadow-ghibli-sm space-y-2";
+        groupDiv.innerHTML = `
+          <div class="text-xs font-bold text-ghibli-moss border-b border-[#E7DCcb] pb-1.5 flex items-center justify-between">
+            <span>${checkCategoryNames[catKey]}</span>
+            <span class="text-[10px] text-ghibli-bark/50">${subItems.filter(i=>i.completed).length}/${subItems.length}</span>
+          </div>
+          <div class="space-y-1.5 pt-1">
+            ${subItems.map(item => `
+              <div class="flex items-start justify-between gap-2 p-1 rounded-lg hover:bg-[#FAF6EE] transition">
+                <label class="flex items-start gap-2 cursor-pointer flex-1 min-w-0">
+                  <input type="checkbox" ${item.completed ? 'checked' : ''} onchange="toggleCheckItem('${item.id}')" class="w-4 h-4 rounded text-ghibli-moss focus:ring-0 mt-0.5 shrink-0">
+                  <div class="min-w-0">
+                    <span class="text-xs font-bold text-ghibli-bark block ${item.completed ? 'line-through text-ghibli-bark/40' : ''}">${item.title}</span>
+                    ${item.notes ? `<span class="text-[10px] text-ghibli-bark/60 block">${item.notes}</span>` : ''}
+                  </div>
+                </label>
+                <div class="flex items-center gap-1 shrink-0 pt-0.5">
+                  <button onclick="openEditChecklistModal('${item.id}')" class="text-ghibli-bark/50 hover:text-ghibli-moss p-1"><i data-lucide="edit-3" class="w-3.5 h-3.5"></i></button>
+                  <button onclick="deleteCheckItem('${item.id}')" class="text-ghibli-bark/40 hover:text-ghibli-terracotta p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(groupDiv);
+      });
+      lucide.createIcons();
+    }
+
+    function toggleCheckItem(id) {
+      const item = (tripData.checklist || []).find(c => c.id === id);
+      if (item) { item.completed = !item.completed; saveData(); renderChecklist(); }
+    }
+
+    function openAddChecklistModal() {
+      document.getElementById('checkModalTitle').innerText = '新增準備項目';
+      document.getElementById('checkItemId').value = '';
+      document.getElementById('checkTitle').value = '';
+      document.getElementById('checkNotes').value = '';
+      document.getElementById('btnDeleteCheck').classList.add('hidden');
+      openModal('checklistModal');
+    }
+
+    function openEditChecklistModal(id) {
+      const item = (tripData.checklist || []).find(c => c.id === id);
+      if (!item) return;
+      document.getElementById('checkModalTitle').innerText = '編輯準備項目';
+      document.getElementById('checkItemId').value = item.id;
+      document.getElementById('checkCategory').value = item.category || 'carryon';
+      document.getElementById('checkTitle').value = item.title;
+      document.getElementById('checkNotes').value = item.notes || '';
+      document.getElementById('btnDeleteCheck').classList.remove('hidden');
+      openModal('checklistModal');
+    }
+
+    function saveCheckItem() {
+      const id = document.getElementById('checkItemId').value;
+      const title = document.getElementById('checkTitle').value.trim();
+      const category = document.getElementById('checkCategory').value;
+      const notes = document.getElementById('checkNotes').value.trim();
+      if (!title) return showToast('請填寫項目名稱！');
+
+      if (!tripData.checklist) tripData.checklist = [];
+      if (id) {
+        const idx = tripData.checklist.findIndex(c => c.id === id);
+        if (idx !== -1) tripData.checklist[idx] = { ...tripData.checklist[idx], title, category, notes };
+      } else {
+        tripData.checklist.push({ id: 'chk-' + Date.now(), category, title, notes, completed: false });
+      }
+      saveData();
+      renderChecklist();
+      closeModal('checklistModal');
+      showToast('準備清單已更新');
+    }
+
+    function deleteCheckItem(id) {
+      tripData.checklist = (tripData.checklist || []).filter(c => c.id !== id);
+      saveData();
+      renderChecklist();
+      showToast('已移除準備項目');
+    }
+
+    function deleteCurrentCheckItem() {
+      const id = document.getElementById('checkItemId').value;
+      if (id) { deleteCheckItem(id); closeModal('checklistModal'); }
+    }
+
+    // 分帳帳本
+    function renderExpenses() {
+      const container = document.getElementById('expenseItemsList');
+      container.innerHTML = '';
+      let totalJPY = 0, totalTWD = 0;
+      let spentYanruJPY = 0, spentYanruTWD = 0;
+      let spentFamilyJPY = 0, spentFamilyTWD = 0;
+      let spentPublicJPY = 0, spentPublicTWD = 0;
+
+      let balancePersonalJPY = 0;
+      let balancePersonalTWD = 0;
+
+      (tripData.expenses || []).forEach(exp => {
+        const jpy = exp.amountJPY || 0;
+        const twd = exp.amountTWD || 0;
+        totalJPY += jpy; totalTWD += twd;
+
+        if (exp.paidBy === '彥如') {
+          spentYanruJPY += jpy; spentYanruTWD += twd;
+          balancePersonalJPY += (jpy / 2);
+          balancePersonalTWD += (twd / 2);
+        } else if (exp.paidBy === '同行家人') {
+          spentFamilyJPY += jpy; spentFamilyTWD += twd;
+          balancePersonalJPY -= (jpy / 2);
+          balancePersonalTWD -= (twd / 2);
+        } else if (exp.paidBy === '公費') {
+          spentPublicJPY += jpy; spentPublicTWD += twd;
+        }
+
+        const parts = [];
+        if (jpy > 0) parts.push(`<span class="font-black text-ghibli-bark">¥${jpy.toLocaleString()}</span>`);
+        if (twd > 0) parts.push(`<span class="font-black text-ghibli-terracotta">NT$${twd.toLocaleString()}</span>`);
+
+        const el = document.createElement('div');
+        el.className = "ghibli-border bg-[#FFFDF9] p-3 shadow-ghibli-sm flex items-center justify-between text-xs";
+        el.innerHTML = `
+          <div>
+            <div class="font-bold text-ghibli-bark flex items-center gap-1.5">
+              <span>${exp.title}</span>
+              <span class="text-[10px] bg-ghibli-parchment px-1.5 py-0.2 rounded font-medium">${exp.category || '其他'}</span>
+              <span class="text-[10px] text-ghibli-bark/50">${exp.payMethod || '現金'}</span>
+            </div>
+            <div class="text-[10px] text-ghibli-leaf font-bold mt-0.5">${exp.paidBy === '公費' ? '👛 公費錢包支出' : `🍃 由 ${exp.paidBy} 代墊`}</div>
+          </div>
+          <div class="text-right flex items-center gap-3">
+            <div>${parts.join(' / ')}</div>
+            <button onclick="deleteExpense('${exp.id}')" class="text-ghibli-bark/30 hover:text-ghibli-terracotta p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+
+      document.getElementById('totalExpenseJPY').innerText = `¥ ${totalJPY.toLocaleString()}`;
+      document.getElementById('totalExpenseTWD').innerText = `NT$ ${totalTWD.toLocaleString()}`;
+      document.getElementById('spentByYanru').innerText = `¥ ${spentYanruJPY.toLocaleString()}`;
+      document.getElementById('spentByYanruTWD').innerText = `NT$ ${spentYanruTWD.toLocaleString()}`;
+      document.getElementById('spentByFamily').innerText = `¥ ${spentFamilyJPY.toLocaleString()}`;
+      document.getElementById('spentByFamilyTWD').innerText = `NT$ ${spentFamilyTWD.toLocaleString()}`;
+      document.getElementById('spentByPublic').innerText = `¥ ${spentPublicJPY.toLocaleString()}`;
+      document.getElementById('spentByPublicTWD').innerText = `NT$ ${spentPublicTWD.toLocaleString()}`;
+
+      const settlementDiv = document.getElementById('settlementList');
+      let html = "";
+      if (Math.abs(balancePersonalJPY) > 1) {
+        if (balancePersonalJPY > 0) html += `<div>• <b>同行家人</b> 應支付 <b>彥如</b> <span class="font-bold text-ghibli-terracotta">¥${Math.round(balancePersonalJPY).toLocaleString()}</span></div>`;
+        else html += `<div>• <b>彥如</b> 應支付 <b>同行家人</b> <span class="font-bold text-ghibli-terracotta">¥${Math.round(-balancePersonalJPY).toLocaleString()}</span></div>`;
+      }
+      if (Math.abs(balancePersonalTWD) > 1) {
+        if (balancePersonalTWD > 0) html += `<div>• <b>同行家人</b> 應支付 <b>彥如</b> <span class="font-bold text-ghibli-terracotta">NT$${Math.round(balancePersonalTWD).toLocaleString()}</span></div>`;
+        else html += `<div>• <b>彥如</b> 應支付 <b>同行家人</b> <span class="font-bold text-ghibli-terracotta">NT$${Math.round(-balancePersonalTWD).toLocaleString()}</span></div>`;
+      }
+      settlementDiv.innerHTML = html || "✨ 私人代墊皆已平帳，公費獨立運作無須平帳。";
+      lucide.createIcons();
+    }
+
+    function saveManualExpense() {
+      const title = document.getElementById('expTitle').value.trim();
+      const amountJPY = parseFloat(document.getElementById('expAmountJPY').value) || 0;
+      const amountTWD = parseFloat(document.getElementById('expAmountTWD').value) || 0;
+      if (!title || (!amountJPY && !amountTWD)) return showToast('請填寫支出名稱與金額！');
+
+      tripData.expenses.push({
+        id: 'exp-' + Date.now(),
+        title,
+        category: document.getElementById('expCategory').value,
+        payMethod: document.getElementById('expPayMethod').value,
+        amountJPY, amountTWD,
+        paidBy: document.getElementById('expPaidBy').value,
+        splitAmong: tripData.members
+      });
+      saveData();
+      renderExpenses();
+      closeModal('expenseModal');
+      showToast('已寫入帳本！');
+    }
+
+    function deleteExpense(id) {
+      tripData.expenses = tripData.expenses.filter(e => e.id !== id);
+      saveData();
+      renderExpenses();
+      showToast('已刪除此筆支出');
+    }
+
+    // 備忘
+    function renderMemos() {
+      const container = document.getElementById('memoList');
+      container.innerHTML = '';
+      (tripData.memos || []).forEach(m => {
+        const card = document.createElement('div');
+        card.className = "ghibli-ticket p-3.5 rounded-2xl shadow-ghibli-sm space-y-1.5";
+        card.innerHTML = `
+          <div class="flex items-start justify-between">
+            <h4 class="text-xs font-bold text-ghibli-bark flex items-center gap-1 font-serif">
+              <span class="text-ghibli-amber">📌</span> ${m.title}
+            </h4>
+            <div class="flex items-center gap-1.5">
+              ${m.codeSnippet ? `<button onclick="copyText('${m.codeSnippet}')" class="btn-ghibli text-[10px] bg-ghibli-moss/10 text-ghibli-moss font-bold px-2 py-0.5 rounded-lg flex items-center gap-1"><i data-lucide="copy" class="w-3 h-3"></i> 複製</button>` : ''}
+              <button onclick="openEditMemoModal('${m.id}')" class="btn-ghibli p-1 text-ghibli-bark/60 hover:text-ghibli-moss"><i data-lucide="edit-3" class="w-3.5 h-3.5"></i></button>
+              <button onclick="deleteMemo('${m.id}')" class="btn-ghibli p-1 text-ghibli-bark/40 hover:text-ghibli-terracotta"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+            </div>
+          </div>
+          <p class="text-xs text-ghibli-bark/80 leading-relaxed">${m.content}</p>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function openAddMemoModal() {
+      document.getElementById('memoModalTitle').innerText = '寫下備忘';
+      document.getElementById('memoItemId').value = '';
+      document.getElementById('memoTitleInput').value = '';
+      document.getElementById('memoContentInput').value = '';
+      document.getElementById('memoCodeInput').value = '';
+      document.getElementById('btnDeleteMemo').classList.add('hidden');
+      openModal('memoModal');
+    }
+
+    function openEditMemoModal(id) {
+      const m = (tripData.memos || []).find(item => item.id === id);
+      if (!m) return;
+      document.getElementById('memoModalTitle').innerText = '編輯備忘';
+      document.getElementById('memoItemId').value = m.id;
+      document.getElementById('memoTitleInput').value = m.title;
+      document.getElementById('memoContentInput').value = m.content;
+      document.getElementById('memoCodeInput').value = m.codeSnippet || '';
+      document.getElementById('btnDeleteMemo').classList.remove('hidden');
+      openModal('memoModal');
+    }
+
+    function saveManualMemo() {
+      const id = document.getElementById('memoItemId').value;
+      const title = document.getElementById('memoTitleInput').value.trim();
+      const content = document.getElementById('memoContentInput').value.trim();
+      const codeSnippet = document.getElementById('memoCodeInput').value.trim();
+      if (!title) return showToast('請填寫標題！');
+
+      if (!tripData.memos) tripData.memos = [];
+      if (id) {
+        const idx = tripData.memos.findIndex(m => m.id === id);
+        if (idx !== -1) tripData.memos[idx] = { ...tripData.memos[idx], title, content, codeSnippet };
+      } else {
+        tripData.memos.push({ id: 'memo-' + Date.now(), title, content, codeSnippet });
+      }
+      saveData();
+      renderMemos();
+      closeModal('memoModal');
+      showToast('備忘已儲存');
+    }
+
+    function deleteMemo(id) {
+      tripData.memos = (tripData.memos || []).filter(m => m.id !== id);
+      saveData();
+      renderMemos();
+      showToast('已刪除備忘');
+    }
+
+    function deleteCurrentMemo() {
+      const id = document.getElementById('memoItemId').value;
+      if (id) { deleteMemo(id); closeModal('memoModal'); }
+    }
+
+    // 憑證文件
+    async function renderDocuments() {
+      const container = document.getElementById('documentsList');
+      if (!container) return;
+      container.innerHTML = '';
+      const docs = tripData.documents || [];
+      if (docs.length === 0) {
+        container.innerHTML = `<div class="ghibli-border bg-[#FFFDF9] p-5 text-center text-xs text-ghibli-bark/50">📜 尚未上傳票券或保單檔案。</div>`;
+        return;
+      }
+      docs.forEach(d => {
+        const card = document.createElement('div');
+        card.className = "ghibli-border bg-[#FFFDF9] p-3.5 shadow-ghibli-sm flex items-start justify-between gap-2";
+        card.innerHTML = `
+          <div class="flex items-start gap-2.5 flex-1 min-w-0">
+            <div class="p-2 rounded-xl bg-ghibli-sky/10 text-ghibli-sky shrink-0 mt-0.5 border border-ghibli-sky/20">
+              <i data-lucide="${d.fileType && d.fileType.includes('pdf') ? 'file' : 'file-text'}" class="w-4 h-4"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h4 class="text-xs font-bold text-ghibli-bark truncate font-serif">${d.title}</h4>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            ${d.fileDataId ? `<button onclick="previewDoc('${d.id}')" class="btn-ghibli p-1.5 bg-ghibli-sky/10 text-ghibli-sky rounded-xl text-xs font-bold flex items-center gap-0.5"><i data-lucide="eye" class="w-3.5 h-3.5"></i> 檢視</button>` : ''}
+            <button onclick="deleteDoc('${d.id}')" class="btn-ghibli p-1.5 text-ghibli-bark/40 hover:text-ghibli-terracotta"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function handleDocFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      tempDocMeta = { name: file.name, type: file.type };
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        tempDocData = ev.target.result;
+        document.getElementById('docFileNameLabel').innerText = file.name;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function saveDocumentItem() {
+      const title = document.getElementById('docTitle').value.trim();
+      if (!title || !tempDocData) return showToast('請填寫標題並選擇上傳檔案！');
+
+      const docId = 'doc-' + Date.now();
+      await saveFileToDB(docId, tempDocData, tempDocMeta);
+      if (!tripData.documents) tripData.documents = [];
+
+      tripData.documents.push({
+        id: docId, title, fileDataId: docId,
+        fileName: tempDocMeta ? tempDocMeta.name : 'document',
+        fileType: tempDocMeta ? tempDocMeta.type : ''
+      });
+      saveData();
+      renderDocuments();
+      closeModal('documentModal');
+      showToast('憑證已妥善存入手帳！');
+    }
+
+    async function previewDoc(id) {
+      const doc = (tripData.documents || []).find(d => d.id === id);
+      const data = await getFileFromDB(id);
+      if (!data) return showToast('無法讀取檔案');
+
+      const isPdf = (doc && doc.fileType && doc.fileType.includes('pdf')) || data.startsWith('data:application/pdf');
+      document.getElementById('viewerTitle').innerText = doc ? doc.title : '憑證檢視';
+      
+      const downloadBtn = document.getElementById('viewerDownloadBtn');
+      downloadBtn.href = data;
+      downloadBtn.download = doc ? (doc.fileName || (isPdf ? `${doc.title}.pdf` : `${doc.title}.png`)) : 'document';
+
+      const viewerContent = document.getElementById('viewerContent');
+      if (isPdf) {
+        viewerContent.innerHTML = `<iframe src="${data}" class="w-full h-full rounded-2xl border border-[#DECDBB]" style="min-height: 60vh;"></iframe>`;
+      } else {
+        viewerContent.innerHTML = `<img src="${data}" class="max-h-full max-w-full object-contain rounded-xl shadow-lg">`;
+      }
+      openModal('docViewerModal');
+    }
+
+    function viewPhoto(src, title = '圖片檢視') {
+      document.getElementById('viewerTitle').innerText = title;
+      const downloadBtn = document.getElementById('viewerDownloadBtn');
+      downloadBtn.href = src;
+      downloadBtn.download = `${title}.png`;
+      document.getElementById('viewerContent').innerHTML = `<img src="${src}" class="max-h-full max-w-full object-contain rounded-xl shadow-lg">`;
+      openModal('docViewerModal');
+    }
+
+    function deleteDoc(id) {
+      deleteFileFromDB(id);
+      tripData.documents = tripData.documents.filter(d => d.id !== id);
+      saveData();
+      renderDocuments();
+      showToast('已移除憑證');
+    }
+
+    function saveData() { localStorage.setItem('ghibli_trip_data_KIX2026_fixed', JSON.stringify(tripData)); }
+    function resetToInitialData() {
+      tripData = JSON.parse(JSON.stringify(INITIAL_SEED));
+      saveData();
+      initApp();
+      closeModal('settingsModal');
+      showToast('已還原預設 8 日行程');
+    }
+
+    function exportTripJson() {
+      const blob = new Blob([JSON.stringify(tripData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `京阪神秋季手帳備份-${tripData.roomCode}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importTripJson(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          tripData = JSON.parse(e.target.result);
+          sanitizeTripData(tripData);
+          saveData();
+          initApp();
+          showToast('JSON 已成功還原！');
+        } catch(err) { showToast('JSON 格式錯誤'); }
+      };
+      reader.readAsText(file);
+    }
+
+    // A4 直式列印手帳 (每頁獨立頁首，隔日必在次頁頁首)
+    function exportItineraryPdf() {
+      const container = document.getElementById('printContainer');
+      let html = '';
+
+      DAY_METAS.forEach((meta) => {
+        const items = tripData.itinerary.filter(i => i.dayIndex === meta.day);
+        if (items.length === 0) return;
+
+        html += `
+          <div class="print-page-group" style="padding-bottom: 20px;">
+            <div style="margin-bottom: 8px; border-bottom: 2px solid #3B6852; padding-bottom: 4px; display: flex; justify-content: space-between; align-items: flex-end;">
+              <div>
+                <h1 style="font-size: 13pt; font-family: 'Noto Serif TC', serif; font-weight: bold; margin: 0; color: #3B6852;">
+                  🍁 ${tripData.tripName} · 旅のしおり
+                </h1>
+                <p style="font-size: 7.5pt; color: #543D32; margin: 2px 0 0 0;">
+                  房間代號：${tripData.roomCode} | 成員：${(tripData.members||[]).join(', ')}
+                </p>
+              </div>
+              <div style="background: #3B6852; color: #ffffff; padding: 3px 8px; border-radius: 6px; font-weight: bold; font-size: 9pt;">
+                Day ${meta.day} · ${meta.date} (${meta.weekday})
+              </div>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">行程動線 / 活動景點</th>
+                  <th style="width: 12%; text-align: center;">類型</th>
+                  <th style="width: 33%;">前往接駁與交通方式</th>
+                  <th style="width: 30%;">溫馨手記與備忘</th>
+                </tr>
+              </thead>
+              <tbody>
+        `;
+
+        items.forEach(item => {
+          const transOpts = item.transportOptions || [];
+          let transDesc = '— 漫步 / 無接駁 —';
+          if (transOpts.length > 0) {
+            transDesc = transOpts.map(opt => {
+              const cost = formatDualCost(opt.costJPY, opt.costTWD);
+              let s = `<div style="margin-bottom: 4px;"><b>[${opt.type.toUpperCase()}]</b> ${opt.description}`;
+              if (opt.durationMinutes) s += ` (${opt.durationMinutes}分)`;
+              s += ` · <span style="color:#C15C3D;">${cost}</span>`;
+              if (opt.isBooked) s += ` <span style="color:#3B6852; font-size:7pt;">✓已劃位</span>`;
+              const optNotes = Array.isArray(opt.notes) ? opt.notes : [];
+              if (optNotes.length > 0) {
+                s += `<ul style="margin:2px 0; padding-left:12px; color:#5D8A68; font-size:7pt;">` + optNotes.map(n => `<li>${n}</li>`).join('') + `</ul>`;
+              }
+              s += `</div>`;
+              return s;
+            }).join('');
+          }
+
+          const notesList = Array.isArray(item.bulletNotes) ? item.bulletNotes : [];
+          let notesHtml = '—';
+          if (notesList.length > 0) {
+            notesHtml = `<ul style="margin:0; padding-left:12px;">` + notesList.map(n => `<li style="margin-bottom:2px;">${n}</li>`).join('') + `</ul>`;
+          }
+
+          html += `
+            <tr class="zebra-row">
+              <td><b>${item.title}</b><br><span style="color:#5D8A68; font-size:7pt;">📍 ${item.locationName||''}</span></td>
+              <td style="text-align: center;">${categoryMap[item.category]?.label || '其他'}</td>
+              <td>${transDesc}</td>
+              <td>${notesHtml}</td>
+            </tr>
+          `;
+        });
+
+        html += `</tbody></table></div>`;
+      });
+
+      container.innerHTML = html;
+      setTimeout(() => window.print(), 200);
+    }
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function openSettingsModal() { openModal('settingsModal'); }
+    function openAddExpenseModal() { openModal('expenseModal'); }
+    function openAddMemoModal() { openModal('memoModal'); }
+    function openAddDocumentModal() { openModal('documentModal'); }
+
+    window.onload = initApp;
+  </script>
+</body>
+</html>
