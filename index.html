@@ -153,7 +153,7 @@
 
 <body class="min-h-screen pb-28 text-ghibli-bark relative overflow-x-hidden">
 
-  <!-- 背景京都建築浮水印 -->
+  <!-- 背景插畫浮水印 -->
   <div class="bg-illustration top-14 -left-10 w-64 h-64 text-ghibli-moss">
     <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.8">
       <path d="M100 15 L100 35 M95 35 L105 35 M85 45 L115 45 M70 55 L130 55 L120 75 L80 75 Z" />
@@ -772,19 +772,27 @@
         <button onclick="closeModal('settingsModal')" class="p-1 text-ghibli-bark/50"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="space-y-2">
-        <button onclick="exportItineraryPdf()" class="w-full btn-ghibli bg-ghibli-moss text-white p-2.5 rounded-xl font-bold flex items-center justify-center gap-1.5 shadow-ghibli-sm">
-          <i data-lucide="printer" class="w-4 h-4"></i> A4 直式列印手帳 (依日分頁)
+        <!-- 核心功能：視覺化修改後一鍵打包產生新網頁檔 -->
+        <button onclick="exportUpdatedHtmlFile()" class="w-full btn-ghibli bg-ghibli-moss hover:bg-[#325845] text-white p-2.5 rounded-xl font-bold flex items-center justify-center gap-1.5 shadow-ghibli-sm">
+          <i data-lucide="file-code" class="w-4 h-4"></i> 📦 匯出最新版 HTML 網頁檔
         </button>
-        <button onclick="exportTripJson()" class="w-full btn-ghibli bg-ghibli-parchment text-ghibli-bark p-2 rounded-xl font-bold flex items-center justify-center gap-1 border border-[#DECDBB]">
-          <i data-lucide="download" class="w-3.5 h-3.5"></i> 下載備份 JSON
-        </button>
-        <label class="w-full btn-ghibli bg-ghibli-parchment text-ghibli-bark p-2 rounded-xl font-bold flex items-center justify-center gap-1 border border-[#DECDBB] cursor-pointer">
-          <i data-lucide="upload" class="w-3.5 h-3.5"></i> 還原備份 JSON
-          <input type="file" accept=".json" class="hidden" onchange="importTripJson(event)">
-        </label>
-        <button onclick="resetToInitialData()" class="w-full text-ghibli-terracotta p-2 rounded-xl font-bold border border-ghibli-terracotta/30">
-          還原預設 8 日京阪神行程
-        </button>
+        <p class="text-[9.5px] text-ghibli-leaf italic text-center">* 修改完成後點此下載，直接拖曳到 GitHub 覆蓋即可，無需手動改程式碼！</p>
+
+        <div class="border-t border-[#E7DCcb] pt-2 space-y-2">
+          <button onclick="exportItineraryPdf()" class="w-full btn-ghibli bg-ghibli-parchment text-ghibli-bark p-2 rounded-xl font-bold flex items-center justify-center gap-1.5 border border-[#DECDBB]">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i> A4 直式列印手帳 (依日分頁)
+          </button>
+          <button onclick="exportTripJson()" class="w-full btn-ghibli bg-ghibli-parchment text-ghibli-bark p-2 rounded-xl font-bold flex items-center justify-center gap-1 border border-[#DECDBB]">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> 下載備份 JSON
+          </button>
+          <label class="w-full btn-ghibli bg-ghibli-parchment text-ghibli-bark p-2 rounded-xl font-bold flex items-center justify-center gap-1 border border-[#DECDBB] cursor-pointer">
+            <i data-lucide="upload" class="w-3.5 h-3.5"></i> 還原備份 JSON
+            <input type="file" accept=".json" class="hidden" onchange="importTripJson(event)">
+          </label>
+          <button onclick="resetToInitialData()" class="w-full text-ghibli-terracotta p-2 rounded-xl font-bold border border-ghibli-terracotta/30">
+            還原預設 8 日京阪神行程
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -1037,7 +1045,7 @@
       renderDocuments();
       lucide.createIcons();
 
-      // 安全註冊 Service Worker（僅在 HTTP/HTTPS 環境下啟用，避免本機 file:// 衝突）
+      // 安全註冊 Service Worker
       if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
         const swScript = `
           const CACHE_NAME = 'ghibli-trip-cache-v2';
@@ -2192,6 +2200,29 @@
         } catch(err) { showToast('JSON 格式錯誤'); }
       };
       reader.readAsText(file);
+    }
+
+    // 核心新增：自動取得當前畫面所有修改，直接產出更新後的 index.html
+    function exportUpdatedHtmlFile() {
+      // 取得當前整個網頁的完整原始碼
+      let htmlContent = document.documentElement.outerHTML;
+
+      // 將程式碼中舊的 INITIAL_SEED 替換成使用者當前最新修改的 tripData
+      const seedRegex = /const INITIAL_SEED = \{[\s\S]*?\};/;
+      const newSeedString = 'const INITIAL_SEED = ' + JSON.stringify(tripData, null, 2) + ';';
+      
+      htmlContent = htmlContent.replace(seedRegex, newSeedString);
+      htmlContent = '<!DOCTYPE html>\n<html lang="zh-TW">\n' + htmlContent.substring(htmlContent.indexOf('<head>'));
+
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index.html';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('📦 已下載最新版 index.html！');
+      closeModal('settingsModal');
     }
 
     // A4 直式列印手帳 (每頁獨立頁首，隔日必在次頁頁首)
